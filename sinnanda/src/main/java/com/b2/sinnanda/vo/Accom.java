@@ -19,7 +19,7 @@ public class Accom {
 	String createDate;
 	String updateDate;
 	
-	AccomCategoryInven accomCategoryInven;	// [이승준] 숙소의 카테고리 목록
+	List<AccomCategoryInven> accomCategoryInven;	// [이승준] 숙소의 카테고리 목록
 	List<Room> rooms;	// [이승준] 숙소가 가지고 있는 객실의 목록
 	AccomAddress accomAddress;	// [이승준] 숙소의 주소
 	String adminName;	// [이승준] 숙소를 등록한 관리자 이름

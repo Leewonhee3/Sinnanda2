@@ -22,7 +22,7 @@
 	<resultMap type="com.b2.sinnanda.vo.AccomCategoryInven" id="accomCategoryListMap">
 		<id column="accom_category_inven_no" property="accomCategoryInvenNo"/>
 		
-		<collection property="accomCategories" ofType="com.b2.sinnanda.vo.AccomCategory">
+		<collection property="accomCategory" ofType="com.b2.sinnanda.vo.AccomCategory">
 			<result column="accom_category_name" property="accomCategoryName"/>
 			<result column="accom_category_img" property="accomCategoryImg"/>
 		</collection>

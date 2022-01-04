@@ -55,7 +55,7 @@ public class AccomService {
 		accom.getAccomAddress().setAddressInfo(addressInfo);
 		
 		// 5. "숙소의 카테고리 목록" 조회
-		accom.getAccomCategoryInven().setAccomCategories(accomCategoryMapper.selectAccomCategoryList(accomNo));
+		accom.setAccomCategoryInven(accomCategoryMapper.selectAccomCategoryList(accomNo));
 		
 		// 6. "객실 목록" 조회를 위한 데이터 가공
 		Map<String, Object> paramRoomListMap = new HashMap<>();

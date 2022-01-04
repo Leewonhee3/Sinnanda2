@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사업자 정산</title>
+<title>사업자 컴플레인</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
 <!-- Required meta tags -->
@@ -29,7 +29,6 @@
 	<link rel="stylesheet" href="/skydash/css/vertical-layout-light/style.css">
 	<!-- endinject -->
 	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
-
 
 </head>
 <body>
@@ -58,10 +57,10 @@
 								<div class="card-body">
 									<span class="subheading">
 										<a href="hostPage?hostNo=${loginUser.host.hostNo}">메인</a> > 
-										정산
+										통계
 									</span>
 									
-									<h1 style="margin-top: 10px;"><strong>내 숙소 수입</strong></h1>
+									<h1 style="margin-top: 10px;"><strong>리뷰 빈도</strong></h1>
 									
 									<div class="container">
 										<div>
@@ -70,7 +69,7 @@
 												<option value="2021">2021년</option>
 												<option value="2020">2020년</option>
 											</select>
-											
+												
 											<select id ="accom" name ="accomName" class="form-control-sm" style="float: right; margin-bottom: 20px; height:33px;">
 												<option value ="">숙소 선택</option>
 												<option value ="전체">전체</option>
@@ -80,10 +79,11 @@
 											</select>
 										</div>
 										
-										<canvas id="myChart" width="100" height="40"></canvas>
-										
+										<div style="position: relative; height:60%; width:60%;" class="col-md-12">	
+											<canvas id="myChart"></canvas>
+										</div>
 									</div>
-   
+ 
    <script type="text/javascript">
    let ctx = document.getElementById('myChart').getContext('2d');
    let myChart = new Chart(ctx, {});
@@ -100,33 +100,25 @@
       
       $.ajax({
          type:'get',
-         url:'getmyHostRevenue?year=' + year+'&accomName='+accomName,
+         url:'/host/getHostReviewChart?year=' + year+'&accomName='+accomName,
          success:function(json){
             console.log(json);
             
             
             //[윤경환] 회원가입을 한 회원수 
             let myData = [];
-            myData.push(json.january);
-            myData.push(json.february);
-            myData.push(json.march);
-            myData.push(json.april);
-            myData.push(json.may);
-            myData.push(json.june);
-            myData.push(json.july);
-            myData.push(json.august);
-            myData.push(json.september);
-            myData.push(json.october);
-            myData.push(json.november);
-            myData.push(json.december);
+            myData.push(json.Rev1);
+            myData.push(json.Rev2);
+            myData.push(json.Rev3);
+            
+            
             
             
           
             
-            
-          		//가입한 총 사업자 
-         		
-					let result  = myData.reduce((accumulator,currentNumber)=> accumulator + currentNumber);
+      
+          	//가입한 총 사업자 
+			let result  = myData.reduce((accumulator,currentNumber)=> accumulator + currentNumber);
 									
 
 					
@@ -135,21 +127,26 @@
           	
             // chart.js
             myChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'pie',
                 data: {
-                    labels: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    labels: ['추천','보통','비추천'],
                     datasets: [{
-                        label: '수입',
+                        label: '리뷰',
                         data: myData,
                         backgroundColor: [
-                        	 'rgba(54, 162, 235, 0.2)'
-                            
+                        	 'rgba(54, 162, 235, 0.2)',
+                        	 'rgba(153, 102, 255, 0.2)',
+                        	 'rgba(255, 99, 132, 0.2)'
+                        	 
                         ],
                         borderColor: [
-                        	 'rgba(54, 162, 235, 1)'
-                          
+                        	 'rgba(54, 162, 235, 1)',
+                        	 'rgba(153, 102, 255, 1)',
+                        	 'rgba(255, 99, 132, 1)'
+                        	 
+                        	 
                         ],
-                        borderWidth: 1
+                      
                     }
                     ]
                 },
@@ -157,21 +154,21 @@
                 	 plugins: {
                          title: {
                              display: true,
-                             text: '# 총수입 :'+ accomName+' :'+ result.toLocaleString() +'원'
+                             text: '# 총 컴플레인 :'+ accomName+' :'+ result +'건'
                              
                          }
                 		
                      },
                     scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    lengend:{
-                    	display:true,
-                    	fontColor: 'rgba(255, 99, 132, 0.2)',
-                    	position:'right'
+                    	 yAxes: [
+                    	        {
+                    	            ticks: {
+                    	            stepSize: 1,
+                    	            min: 0
+                    	               }
+                    	        }]
                     }
+                   
                 }
             });
             
@@ -192,14 +189,15 @@
 	
 	<!-- [이승준] 하단 Footer - SATRT -->
 	<%@ include file="/WEB-INF/partials/footer.jsp" %>
-	<!-- [이승준] 하단 Footer - END -->				
-							
+	<!-- [이승준] 하단 Footer - END -->
+						
 <script src="/js/hoverable-collapse.js"></script>
 <script src="/js/template.js"></script>
 <script src="/js/settings.js"></script>
 <script src="/js/todolist.js"></script>
 <script src="/js/dashboard.js"></script>
 <script src="/js/Chart.roundedBarCharts.js"></script>
-<script src="/vendors/js/vendor.bundle.base.js"></script>							
+<script src="/vendors/js/vendor.bundle.base.js"></script>		
+					
 </body>
 </html>

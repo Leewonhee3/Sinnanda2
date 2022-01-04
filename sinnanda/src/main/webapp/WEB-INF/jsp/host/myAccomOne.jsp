@@ -27,10 +27,11 @@
 	<link rel="stylesheet" href="/skydash/css/vertical-layout-light/style.css">
 	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
 	
-	<title>예약 페이지</title>
+	<title>사업자 숙소 페이지</title>
 </head>
 
 <body>
+	
 	<div class="container-scroller">
 	
 		<!-- [이승준] 호스트 페이지 상단 내비바 - START -->
@@ -46,76 +47,66 @@
 			
 			<div class="main-panel">
 				<div class="content-wrapper">
-					<!-- 내용1 -->
 					<div class="row" style="height: 100%;">
 						<div class="col-md-12 grid-margin stretch-card">
 							<div class="card position-relative">
 								<div class="card-body">
 									<span class="subheading" style="margin-left: 10px;">
 										<a href="hostPage?hostNo=${loginUser.host.hostNo}">메인</a> > 
-										<a href="myReserveList">예약내역 목록</a> > 
-										예약내역 상세보기
+										<a href="myAccomList">숙소 목록</a> > 
+										숙소 상세보기
 									</span>
 									
-									<h1 style="margin-top: 10px;"><strong>예약내역 상세보기</strong></h1>
+									<h1 style="margin-top: 10px;"><strong>사업자 숙소 상세보기</strong></h1>
 									
-								    <div class="container">
+									<div class="container">
 										<table class="table table-myPage" style="width: 100%;">
 											<tr>
-												<th style="width: 12%;">예약번호</th>
-												<td>${reserve.reserveNo}</td>
+												<th style="width: 15%;">숙소 번호</th>
+												<td>${accom.accomNo}</td>
 											</tr>
 											<tr>
-												<th>예약자 이름</th>
-												<td>${reserve.memberName}</td>
+												<th>숙소명</th>
+												<td>${accom.accomName}</td>
 											</tr>
 											<tr>
-												<th>숙소이름</th>
-												<td>${reserve.accomName }</td>
+												<th>적용 등급</th>
+												<td>${accom.commissionName}</td>
 											</tr>
 											<tr>
-												<th>객실이름</th>
-												<td>${reserve.roomName }</td>
+												<th>설명 요약</th>
+												<td>${accom.accomDescription}</td>
 											</tr>
 											<tr>
-												<th>인원</th>
-												<td>${reserve.reservePersonnel }</td>
+												<th>설명 원본</th>
+												<td>${accom.accomDescriptionLong}</td>
 											</tr>
 											<tr>
-												<th>상태</th>
-												<td>${reserve.reserveUse }</td>
-											</tr>
-											<!-- 취소된 예약인 경우 -->
-											<c:if test="${reserve.reserveUse == '중간 취소' }">
-												<tr>
-													<th>예약 취소일</th>
-													<td>${reserve.reserveCancelDate }</td>
-												</tr>
-											</c:if>
-											<tr>
-												<th>가격</th>
-												<td><fmt:formatNumber value="${reserve.paymentPrice }" pattern="#,###" />원</td>
+												<th>숙소 이미지</th>
+												<td>${accom.accomImg}</td>
 											</tr>
 											<tr>
-												<th>결제방법</th>
-												<td>${reserve.paymentMethod }</td>
+												<th>방 개수</th>
+												<td>${accom.roomCount}</td>
 											</tr>
 											<tr>
-												<th>예약한 날짜</th>
+												<th>주소</th>
+												<td>${accom.accomAddress.addressInfo}</td>
+											</tr>
+											<tr>
+												<th>등록일</th>
 												<td>
-													<fmt:parseDate value="${reserve.reserveDate}" var="reserveDate" pattern="yyyy-MM-dd HH:mm:ss.S" />
-													<fmt:formatDate value="${reserveDate}" pattern="yy / MM / dd HH:mm"/>
+													<fmt:parseDate value="${accom.createDate}" var="createDate" pattern="yyyy-MM-dd HH:mm:ss.S" />
+													<fmt:formatDate value="${createDate}" pattern="yy/MM/dd HH:mm"/>
 												</td>
 											</tr>
-											<tr>
-												<th>체크인</th>
-												<td>${reserve.reserveCheckIn }</td>
-											</tr>
-											<tr>
-												<th>체크아웃</th>
-												<td>${reserve.reserveCheckOut }</td>
-											</tr>
-										</table>										
+										</table>
+										
+										<!-- 구분선 -->
+										<hr class="myPage-line">
+										
+										<!-- 답변 부분 -->
+										<h2><strong>관리자 답변</strong></h2>
 										
 									</div>
 								</div>

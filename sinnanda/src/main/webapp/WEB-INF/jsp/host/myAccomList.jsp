@@ -27,7 +27,7 @@
 	<link rel="stylesheet" href="/skydash/css/vertical-layout-light/style.css">
 	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
 	
-	<title>예약 페이지</title>
+	<title>사업자 숙소 페이지</title>
 </head>
 
 <body>
@@ -53,70 +53,83 @@
 								<div class="card-body">
 									<span class="subheading" style="margin-left: 10px;">
 										<a href="hostPage?hostNo=${loginUser.host.hostNo}">메인</a> > 
-										<a href="myReserveList">예약내역 목록</a> > 
-										예약내역 상세보기
+										숙소 목록
 									</span>
 									
-									<h1 style="margin-top: 10px;"><strong>예약내역 상세보기</strong></h1>
+									<h1 style="margin-top: 10px;"><strong>사업자 숙소 목록</strong></h1>
 									
 								    <div class="container">
-										<table class="table table-myPage" style="width: 100%;">
-											<tr>
-												<th style="width: 12%;">예약번호</th>
-												<td>${reserve.reserveNo}</td>
-											</tr>
-											<tr>
-												<th>예약자 이름</th>
-												<td>${reserve.memberName}</td>
-											</tr>
-											<tr>
-												<th>숙소이름</th>
-												<td>${reserve.accomName }</td>
-											</tr>
-											<tr>
-												<th>객실이름</th>
-												<td>${reserve.roomName }</td>
-											</tr>
-											<tr>
-												<th>인원</th>
-												<td>${reserve.reservePersonnel }</td>
-											</tr>
-											<tr>
-												<th>상태</th>
-												<td>${reserve.reserveUse }</td>
-											</tr>
-											<!-- 취소된 예약인 경우 -->
-											<c:if test="${reserve.reserveUse == '중간 취소' }">
-												<tr>
-													<th>예약 취소일</th>
-													<td>${reserve.reserveCancelDate }</td>
-												</tr>
-											</c:if>
-											<tr>
-												<th>가격</th>
-												<td><fmt:formatNumber value="${reserve.paymentPrice }" pattern="#,###" />원</td>
-											</tr>
-											<tr>
-												<th>결제방법</th>
-												<td>${reserve.paymentMethod }</td>
-											</tr>
-											<tr>
-												<th>예약한 날짜</th>
-												<td>
-													<fmt:parseDate value="${reserve.reserveDate}" var="reserveDate" pattern="yyyy-MM-dd HH:mm:ss.S" />
-													<fmt:formatDate value="${reserveDate}" pattern="yy / MM / dd HH:mm"/>
-												</td>
-											</tr>
-											<tr>
-												<th>체크인</th>
-												<td>${reserve.reserveCheckIn }</td>
-											</tr>
-											<tr>
-												<th>체크아웃</th>
-												<td>${reserve.reserveCheckOut }</td>
-											</tr>
-										</table>										
+								    	<div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+											<span style="line-heigth: 100px;">총 개수 : <strong style="color: red;">${accomListTotalCount}</strong></span>
+										</div>
 										
+										<table class="table table-myPage" style="width: 100%;">
+											<tr style="text-align:center">
+												<th width="15%">번호</th>
+												<th>분류</th>
+												<th>숙소명</th>
+												<th>방 개수</th>
+												<th>등급</th>
+												<th>등록일</th>
+											</tr>
+											<c:forEach items="${accomList}" var="accom">
+												<tr>
+													<td style="text-align:center">${accom.accomNo}</td>
+													<td style="text-align:center">${accom.accomCategoryName}</td>
+													<td style="text-align:center">
+														<a href="myAccomOne?accomNo=${accom.accomNo}">${accom.accomName}</a>
+													</td>
+													<td style="text-align:center">${accom.roomCount}</td>
+													<td style="text-align:center">${accom.commissionName}</td>
+													<td style="text-align:center">
+														<fmt:parseDate value="${accom.createDate}" var="createDate" pattern="yyyy-MM-dd HH:mm:ss.S" />
+														<fmt:formatDate value="${createDate}" pattern="yy/MM/dd"/>
+													</td>
+												</tr>
+											</c:forEach>
+										</table>
+										<a href="addHostQna" class="btn btn-primary" style="float: right; margin-top: 20px;">문의사항 작성</a>
+										
+										<!-- Paging -->			
+										<div class="row mt-5">
+									    	<div class="col text-center">
+									            <div class="block-27">
+													<ul>
+														<!-- '이전' 버튼 -->
+														<c:if test="${beginRow >= ROW_PER_PAGE}">
+															<li><a href="myAccomList?currentPage=${currentPage-1}">&lt;</a></li>
+														</c:if>
+														
+														<!-- Page 번호 -->
+														<c:set var="doneLoop" value="false"></c:set>
+														<c:forEach var="i" begin="${pageNo}" end="${pageNo + 9}">
+														
+															<!-- Page 숫자 10개 출력 -->
+															<c:if test="${not doneLoop}">
+																<c:choose>
+																	<c:when test="${currentPage == i}">				
+																		<li class="active"><span>${i}</span></li>
+																	</c:when>
+												    				<c:otherwise>
+																		<li><a href="myAccomList?currentPage=${i}">${i}</a></li>	
+																	</c:otherwise>		
+																</c:choose>
+																<!-- LastPage이면 다음 페이지 번호를 출력하지 않는다 -->
+																<c:if test="${i == lastPage}">
+																	<c:set var="doneLoop" value="true"></c:set>
+																</c:if>
+															</c:if>
+														</c:forEach>
+														
+														<!-- '다음' 버튼 -->
+														<c:if test="${currentPage != lastPage}">
+															<li><a href="myAccomList?currentPage=${currentPage+1}">&gt;</a></li>
+														</c:if>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<!-- Paging -->
 									</div>
 								</div>
 							</div>

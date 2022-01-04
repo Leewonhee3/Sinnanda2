@@ -12,5 +12,5 @@ public class AccomCategoryInven {
 	private String createDate;
 	private String upcateDate;
 	
-	private List<AccomCategory> accomCategories;
+	private AccomCategory accomCategory;
 }
