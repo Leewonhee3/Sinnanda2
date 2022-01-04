@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.b2.sinnanda.mapper.NoticeMapper">
+
+	<!-- [김영후] Notice 삭제 -->
+	<delete id="deleteNotice" >
+		DELETE 
+		FROM notice 
+		WHERE notice_no = #{noticeNo} AND admin_no = #{adminNo}
+	</delete>
+
+	<!-- [김영후] Notice 수정 -->
+	<update id="updateNotice" parameterType="com.b2.sinnanda.vo.Notice">
+		UPDATE notice 
+		SET notice_title = #{noticeTitle}, 
+			notice_category = #{noticeCategory}, 
+			notice_content = #{noticeContent}, 
+			notice_pin = #{noticePin}, 
+			update_date = NOW()
+		WHERE notice_no = #{noticeNo} AND admin_no = #{adminNo}
+	</update>
+
+	<!-- [김영후] Notice 추가 -->
+	<insert id="insertNotice" parameterType="com.b2.sinnanda.vo.Notice">
+		INSERT INTO notice(
+			admin_no, 
+			notice_category, 
+			notice_title, 
+			notice_content, 
+			notice_pin, 
+			create_date, 
+			update_date 
+		) VALUES (
+			#{adminNo}, 
+			#{noticeCategory}, 
+			#{noticeTitle}, 
+			#{noticeContent}, 
+			#{noticePin}, 
+			NOW(), 
+			NOW()
+		)
+		<selectKey keyProperty="noticeNo" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- [김영후] Notice 상세조회 Map -->
+	<resultMap type="com.b2.sinnanda.vo.Notice" id="NoticeOneMap">
+		<id column="notice_no" property="noticeNo"/>
+		<result column="admin_no" property="adminNo"/>
+		<result column="notice_category" property="noticeCategory"/>
+		<result column="notice_title" property="noticeTitle"/>
+		<result column="notice_content" property="noticeContent"/>
+		<result column="notice_pin" property="noticePin"/>
+		<result column="create_date" property="createDate"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="admin_name" property="adminName"/>
+	</resultMap>	
+	<!-- [김영후] Notice 상세조회 -->
+	<select id="selectNoticeOne"  parameterType="Map" resultMap="NoticeOneMap">
+		SELECT 
+			n.notice_no, 
+			a.admin_no, 
+			n.notice_category, 
+			n.notice_title, 
+			n.notice_content, 
+			n.notice_pin, 
+			n.create_date, 
+			n.update_date, 
+			a.admin_name 
+		FROM notice n 
+		LEFT JOIN admin a 
+			ON n.admin_no = a.admin_no
+		WHERE n.notice_no = #{noticeNo}
+	</select>
+	
+	<!-- [김영후] NoticePin 목록조회 Map -->
+	<resultMap type="com.b2.sinnanda.vo.Notice" id="NoticePinListMap">
+		<id column="notice_no" property="noticeNo"/>
+		<result column="notice_category" property="noticeCategory"/>
+		<result column="notice_title" property="noticeTitle"/>
+		<result column="create_date" property="createDate"/>
+		<result column="admin_name" property="adminName"/>
+	</resultMap>
+	<!-- [김영후] NoticePin 목록조회 -->
+	<select id="selectNoticePinList" parameterType="Map" resultMap="NoticePinListMap">
+		SELECT 
+			n.notice_no, 
+			n.notice_category, 
+			n.notice_title, 
+			n.create_date, 
+			a.admin_name
+		FROM notice n
+		LEFT JOIN admin a
+			ON n.admin_no = a.admin_no
+		<where>
+			n.notice_pin = 'yes'
+		</where>
+		ORDER BY create_date DESC
+		LIMIT 0, 2
+	</select>
+	
+	<!-- [김영후] Notice 목록조회 Map -->
+	<resultMap type="com.b2.sinnanda.vo.Notice" id="NoticeListMap">
+		<id column="notice_no" property="noticeNo"/>
+		<result column="notice_category" property="noticeCategory"/>
+		<result column="notice_title" property="noticeTitle"/>
+		<result column="create_date" property="createDate"/>
+		<result column="admin_name" property="adminName"/>
+	</resultMap>
+	<!-- [김영후] Notice 목록조회 -->
+	<select id="selectNoticeListByCategory" parameterType="Map" resultMap="NoticeListMap">
+		SELECT 
+			n.notice_no, 
+			n.notice_category,
+			n.notice_title, 
+			n.create_date, 
+			a.admin_name
+		FROM notice n
+		LEFT JOIN admin a
+			ON n.admin_no = a.admin_no
+		<if test="noticeCategory != null">
+			<where>
+				notice_category = #{noticeCategory}
+			</where>
+		</if>
+		ORDER BY create_date DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- [김영후] Notice 갯수 조회-->
+	<select id="selectNoticeTotalCount" parameterType="String" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM notice
+		<if test="noticeCategory != null">
+			<where>
+				notice_category = #{noticeCategory}
+			</where>
+		</if>
+	</select>
+	
+	
+	
+</mapper>

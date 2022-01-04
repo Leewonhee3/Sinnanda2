@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.b2.sinnanda.mapper.AdminMapper">
+	
+ 
+	
+	<!-- [윤경환] 관리자회원가입 -->
+	<insert id = "insertAdmin" parameterType="com.b2.sinnanda.vo.Admin">
+		INSERT INTO admin(
+				admin_id, 
+				admin_pw,
+				admin_position_no,
+				admin_name,
+				member_level,
+				create_date,
+				update_date
+			)VALUES (
+				#{adminId},
+				#{adminPw},
+				#{adminPositionNo},
+				#{adminName},	
+				'3',
+				NOW(),
+				NOW()
+				)
+	</insert>
+	
+	<!--[윤경환] AdminOne Map -->
+	<resultMap type="com.b2.sinnanda.vo.Admin" id="AdminOneMap">
+		<id column="admin_id" property="adminId"></id>
+		<id column="admin_name" property="adminName"></id>
+		<id column="admin_position_no" property="adminPositionNo"></id>
+		<id column="admin_position" property="adminPosition"></id>
+		<id column="admin_level" property="adminLevel"></id>
+		<id column="update_date" property="updateDate"></id>
+	</resultMap>
+	
+	<!--[윤경환]관리자 세부내용 -->
+	<select id="selectAdminOne" parameterType="Map" resultMap="AdminOneMap">
+		SELECT 
+			a.admin_id,
+			a.admin_pw,
+			a.admin_name,
+			a.admin_position_no,
+			ap.admin_position,
+			ap.admin_level,
+			a.update_date 
+ 			FROM admin AS a 
+ 	LEFT JOIN admin_position AS ap 
+ 	ON a.admin_position_no = ap.admin_position_no 
+ 	WHERE a.admin_No =#{adminNo}
+	</select>
+	
+	<!--[윤경환] modifyAdmin Map -->
+	<resultMap type="com.b2.sinnanda.vo.Admin" id="modifyAdmin">
+		<id column="admin_no" property="adminNo"></id>
+		<id column="admin_id" property="adminId"></id>
+		<id column="admin_pw" property="adminPw"></id>
+		<id column="admin_name" property="adminName"></id>
+		<id column="admin_position" property="adminPosition"></id>
+	</resultMap>
+	
+	
+	<!-- [윤경환] 관리자 내용 수정 폼으로 이동  -->
+	<select id="modifyAdmin" parameterType="Map" resultMap="modifyAdmin">
+		SELECT 	
+			a.admin_no,
+			a.admin_id, 
+			a.admin_pw,
+			a.admin_name,
+			ap.admin_position
+		FROM 
+			admin AS a
+			LEFT JOIN 
+			admin_position AS ap
+		ON	a.admin_position_no = ap.admin_position_no 
+		WHERE a.admin_id = #{adminId} AND a.admin_pw =#{adminPw}
+ 
+	</select>
+	
+	<!-- [윤경환] 관리자 내용 수정 -->
+	<update id="modifyAdminForm" parameterType="com.b2.sinnanda.vo.Admin">
+		UPDATE admin SET 
+			admin_pw = #{adminPw},
+			admin_name = #{adminName}, 
+			update_date = NOW()
+		WHERE admin_no = #{adminNo}
+	</update>	
+	
+	<!--[윤경환] modifyAdmin Map -->
+	<resultMap type="com.b2.sinnanda.vo.Admin" id="selectAdminName">
+		<id column="admin_no" property="adminNo"></id>
+		<id column="admin_name" property="adminName"></id>
+		<id column="admin_pw" property="adminPw"></id>
+	</resultMap>
+	
+	
+	<!--[윤경환]  관리자 이름 및 비번 가져오기-->
+	<select id="selectAdminName"  parameterType="Map" resultMap="modifyAdmin">
+			SELECT 
+				admin_no,
+				admin_id,
+				admin_name,
+				admin_pw
+				FROM admin 
+				WHERE admin_no = #{adminNo}
+	</select>
+	
+	
+	<!-- [윤경환] Admin List Map -->
+	<resultMap type="com.b2.sinnanda.vo.Admin" id="AdminListMap">
+		<id column="admin_no" property="adminNo"/>
+		<result column="admin_id" property="adminId"/>
+		<result column="admin_name" property="adminName"/>
+		<result column="admin_position" property="adminPosition"/>
+		<result column="admin_level" property="adminLevel"/>
+		<result column="update_date" property="updateDate"/>
+	</resultMap>
+	
+	<!--[윤경환] 관리자 리스트  -->
+	<select id="selectAdminList" parameterType="Map" resultMap="AdminListMap">
+		 
+	 		SELECT 
+	 			a.admin_no,
+				a.admin_id ,
+				a.admin_name,
+				ap.admin_position,
+				ap.admin_level,
+				a.update_date
+			 FROM admin AS a 
+				 LEFT JOIN admin_position AS ap 
+				 ON a.admin_position_no = ap.admin_position_no
+				 <where>
+				 	<if test ="adminPosition != null">
+				 		admin_position = #{adminPosition}
+				 	</if>
+				 </where>
+			 ORDER BY a.update_date DESC
+			 LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!--[윤경환] 관리자 총합 -->
+	
+	<select id="selectAdminTotalCount" parameterType="String" resultType="int">
+		 
+ 		SELECT
+ 			 COUNT(*)
+		FROM admin a
+		LEFT JOIN admin_position ap
+			ON a.admin_position_no = ap.admin_position_no 
+		<if test ="adminPosition != null">
+			<where>
+				ap.admin_position = #{adminPosition}
+			</where>
+		</if>
+	
+	</select>
+	
+	
+	<!-- [운경환] 관리자 등급 수정 -->
+	<update id="modifyAdminList" parameterType="com.b2.sinnanda.vo.Admin">
+		 UPDATE admin SET 
+			admin_position_no = #{adminPositionNo},
+			update_date = NOW()
+		WHERE admin_no = #{adminNo}
+	
+	</update>
+	
+	
+	<!--[윤경환] 회원가입시 아이디 중복 체크  -->
+	<select id="checkAdminId"  parameterType="String" resultType="int">
+			 SELECT COUNT(admin_id) FROM
+			(SELECT admin_id 
+				FROM admin 
+				WHERE admin_id = #{adminId}) u
+	
+	</select>
+	<resultMap type="com.b2.sinnanda.vo.Member" id="MemberListMap">
+		<id column="member_no" property="memberNo"></id>
+		<id column="member_id" property="memberId"></id>
+		<id column="member_pw" property="memberPw"></id>
+		<id column="member_name" property="memberName"></id>
+		<id column="member_age" property="memberAge"></id>
+		<id column="member_tel" property="memberTel"></id>
+		<id column="member_email" property="memberEmail"></id>
+		<id column="member_active" property="memberActive"></id>
+		<id column="update_date" property="updateDate"></id>
+	
+	</resultMap>
+	
+	
+	
+	<!--[윤경환]  맴버 리스트 구현-->
+		<select id="selectMemberList" parameterType="Map" resultMap="MemberListMap">
+			SELECT 
+				member_no,
+				member_id,
+				member_pw,
+				member_name,
+				member_age,
+				member_tel,
+				member_email,
+				member_active,
+				update_date
+			FROM member
+			 <where>
+				 	<if test ="memberActive != null">
+				 		member_active = #{memberActive}
+				 	</if>
+			 </where>
+			ORDER by update_date DESC 
+			LIMIT #{beginRow}, #{rowPerPage}
+			
+		
+		</select>
+	<!--[윤경환] 맴버 전체 수  -->
+	<select id="selectMemberTotalCount" parameterType="int" resultType="int">
+		 
+ 		SELECT
+ 			 COUNT(*)
+ 		FROM member
+		<if test ="memberActive != null">
+			<where>
+				member_active = #{memberActive}
+			</where>
+		</if>
+	</select>
+	
+	
+	<!-- [윤경환] member 비활성화되어 있는거 다시 활성화 -->
+	<update id="modifyMemberAc" parameterType="com.b2.sinnanda.vo.Member">
+		
+		UPDATE member SET 
+			member_active = '1',
+			update_date = NOW()
+		WHERE member_no = #{memberNo}
+	</update>
+	
+	
+	
+	<!-- [윤경환] host 비활성화되어 있는거 다시 활성화 -->
+	<update id="modifyHostAc" parameterType="com.b2.sinnanda.vo.Host">
+		
+		UPDATE host SET 
+			host_active = '1',
+			update_date = NOW()
+		WHERE host_no = #{hostNo}
+	</update>
+	
+	<resultMap type="com.b2.sinnanda.vo.Host" id="HostListMap">
+		<id column="host_no" property="hostNo"></id>
+		<id column="host_id" property="hostId"></id>
+		<id column="host_pw" property="hostPw"></id>
+		<id column="host_name" property="hostName"></id>
+		<id column="host_tel" property="hostTel"></id>
+		<id column="host_active" property="hostActive"></id>
+		<id column="update_date" property="updateDate"></id>
+	</resultMap>
+	
+	<!--[윤경환] 호스트 리스트  -->
+	<select id="selectHostList" parameterType="Map" resultMap="HostListMap">
+		SELECT  
+			host_no,
+			host_id,
+			host_pw,
+			host_name,
+			host_tel,
+			host_active,
+			update_date
+		FROM host
+			<where>
+				<if test ="hostActive !=null">
+					host_active = #{hostActive}
+				</if>
+			</where>
+		ORDER by update_date DESC 
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	
+	<!--[윤경환] 호스트 전체 수  -->
+	<select id="selectHostTotalCount" parameterType="int" resultType="int">
+ 		SELECT
+ 			 COUNT(*)
+ 		FROM host
+		<if test ="hostActive != null">
+			<where>
+				host_active = #{hostActive}
+			</where>
+		</if>
+	</select>
+	
+	
+	
+	
+	<!-- [윤경환] 날짜에 따라 정산 -->
+	
+	<select id ="IncomeAdminYear" parameterType="int" resultType="java.util.Map">
+		SELECT 
+			SUM(CASE WHEN MONTH(p.update_date) =1 THEN a.payout_commission END) january,
+			SUM(CASE WHEN MONTH(p.update_date) =2 THEN a.payout_commission END) february,
+			SUM(CASE WHEN MONTH(p.update_date) =3 THEN a.payout_commission END) march,
+			SUM(CASE WHEN MONTH(p.update_date) =4 THEN a.payout_commission END) april,
+			SUM(CASE WHEN MONTH(p.update_date) =5 THEN a.payout_commission END) may,
+			SUM(CASE WHEN MONTH(p.update_date) =6 THEN a.payout_commission END) june,
+			SUM(CASE WHEN MONTH(p.update_date) =7 THEN a.payout_commission END) july,
+			SUM(CASE WHEN MONTH(p.update_date) =8 THEN a.payout_commission END) august,
+			SUM(CASE WHEN MONTH(p.update_date) =9 THEN a.payout_commission END) september,
+			SUM(CASE WHEN MONTH(p.update_date) =10 THEN a.payout_commission END) october,
+			SUM(CASE WHEN MONTH(p.update_date) =11 THEN a.payout_commission END) november,
+			SUM(CASE WHEN MONTH(p.update_date) =12 THEN a.payout_commission END) december
+		FROM admin_sales as a
+		INNER JOIN payment AS p
+		ON a.payment_no = p.payment_no
+		WHERE YEAR(p.update_date)=#{year}
+	</select>
+	
+	
+	<!-- [윤경환] 회원가입 한 회원 수-->
+	<select id="TotalMemberYear" parameterType="int" resultType="java.util.Map">			
+		SELECT 
+			COUNT(CASE WHEN MONTH(create_date) =1  THEN member_id END) AS january,
+			COUNT(CASE WHEN MONTH(create_date) =2  THEN member_id END) AS february,
+			COUNT(CASE WHEN MONTH(create_date) =3  THEN member_id END) AS march,
+			COUNT(CASE WHEN MONTH(create_date) =4  THEN member_id END) AS april,
+			COUNT(CASE WHEN MONTH(create_date) =5  THEN member_id END) AS may,
+			COUNT(CASE WHEN MONTH(create_date) =6  THEN member_id END) AS june,
+			COUNT(CASE WHEN MONTH(create_date) =7  THEN member_id END) AS july,
+			COUNT(CASE WHEN MONTH(create_date) =8  THEN member_id END) AS august,
+			COUNT(CASE WHEN MONTH(create_date) =9  THEN member_id END) AS september,
+			COUNT(CASE WHEN MONTH(create_date) =10  THEN member_id END) AS october,
+			COUNT(CASE WHEN MONTH(create_date) =11 THEN member_id END) AS november,
+			COUNT(CASE WHEN MONTH(create_date) =12  THEN member_id END) AS december	
+			FROM member 
+		WHERE YEAR(create_date) = #{year}
+	</select>
+	
+	
+	<!--[윤경환]  탈퇴한 회원 수 -->
+	<select id="DeleteMemberYear" parameterType="int" resultType="java.util.Map">
+		SELECT 
+			COUNT(CASE WHEN MONTH(out_date) =1  THEN member_id END) AS january,
+			COUNT(CASE WHEN MONTH(out_date) =2  THEN member_id END) AS february,
+			COUNT(CASE WHEN MONTH(out_date) =3  THEN member_id END) AS march,
+			COUNT(CASE WHEN MONTH(out_date) =4  THEN member_id END) AS april,
+			COUNT(CASE WHEN MONTH(out_date) =5  THEN member_id END) AS may,
+			COUNT(CASE WHEN MONTH(out_date) =6  THEN member_id END) AS june,
+			COUNT(CASE WHEN MONTH(out_date) =7  THEN member_id END) AS july,
+			COUNT(CASE WHEN MONTH(out_date)= 8  THEN member_id END) AS august,
+			COUNT(CASE WHEN MONTH(out_date) =9  THEN member_id END) AS september,
+			COUNT(CASE WHEN MONTH(out_date) =10  THEN member_id END) AS october,
+			COUNT(CASE WHEN MONTH(out_date) =11 THEN member_id END) AS november,
+			COUNT(CASE WHEN MONTH(out_date) =12  THEN member_id END) AS december
+		FROM member_out 
+		WHERE YEAR(out_date) = #{year}
+	</select>
+	
+	
+	<!-- [윤경환] 사업자 뢰원가입 수  -->
+	<select id="TotalHostYear" parameterType="int" resultType="java.util.Map">
+		SELECT 
+			COUNT(CASE WHEN MONTH(create_date) =1  THEN host_no END) AS january,
+			COUNT(CASE WHEN MONTH(create_date) =2  THEN host_no  END) AS february,
+			COUNT(CASE WHEN MONTH(create_date) =3  THEN host_no  END) AS march,
+			COUNT(CASE WHEN MONTH(create_date) =4  THEN host_no  END) AS april,
+			COUNT(CASE WHEN MONTH(create_date) =5  THEN host_no  END) AS may,
+			COUNT(CASE WHEN MONTH(create_date) =6  THEN host_no  END) AS june,
+			COUNT(CASE WHEN MONTH(create_date) =7  THEN host_no  END) AS july,
+			COUNT(CASE WHEN MONTH(create_date) =8  THEN host_no  END) AS august,
+			COUNT(CASE WHEN MONTH(create_date) =9  THEN host_no  END) AS september,
+			COUNT(CASE WHEN MONTH(create_date) =10 THEN host_no  END) AS october,
+			COUNT(CASE WHEN MONTH(create_date) =11 THEN host_no END) AS november,
+			COUNT(CASE WHEN MONTH(create_date) =12 THEN host_no  END) AS december
+		FROM host 
+		WHERE YEAR(create_date) = #{year}
+
+	</select>
+	<!-- 숙바 관련하여 년도와 종류에 따른 분류  -->
+	
+	
+	<select id="TotalAccomYear" parameterType="com.b2.sinnanda.vo.Accom" resultType="java.util.Map">
+		SELECT 
+			count(CASE WHEN MONTH(a.create_date) =1 THEN a.accom_no END) january,
+			count(CASE WHEN MONTH(a.create_date) =2 THEN a.accom_no END) february,
+			count(CASE WHEN MONTH(a.create_date) =3 THEN a.accom_no END) march,
+			count(CASE WHEN MONTH(a.create_date) =4 THEN a.accom_no END) april,
+			count(CASE WHEN MONTH(a.create_date) =5 THEN a.accom_no END) may,
+			count(CASE WHEN MONTH(a.create_date) =6 THEN a.accom_no END) june,
+			count(CASE WHEN MONTH(a.create_date) =7 THEN a.accom_no END) july,
+			count(CASE WHEN MONTH(a.create_date) =8 THEN a.accom_no END) august,
+			count(CASE WHEN MONTH(a.create_date) =9 THEN a.accom_no END) september,
+			count(CASE WHEN MONTH(a.create_date) =10 THEN a.accom_no END) october,
+			count(CASE WHEN MONTH(a.create_date) =11 THEN a.accom_no END) november,
+			count(CASE WHEN MONTH(a.create_date) =12 THEN a.accom_no END) december
+		FROM accom as a
+		INNER JOIN accom_category AS ac
+		ON a.accom_category_no = ac.accom_category_no 
+			<if test="accomName != null">
+				<where>
+					ac.accom_category_name = #{accomName}
+				</where>
+			</if>
+		AND YEAR(a.create_date)=#{year} 	
+		
+	</select>
+</mapper>

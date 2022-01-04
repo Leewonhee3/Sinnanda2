@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.b2.sinnanda.mapper.LoginMapper">
+
+	<!-- [김영후] Member 로그인 성공 시 마지막 접속일 업데이트 -->
+	<update id="updateMemberLastLogin" parameterType="int">
+		UPDATE
+			member
+		SET
+			last_login_date = NOW()
+		WHERE 
+			member_no = #{memberNo}
+	</update>
+	
+	<!-- [이승준] 로그인 회원 유형 조회 (반환 값이 String인 이유, 조회 실패 시 null 반환되기 때문)-->
+	<select id="selectLoginCheckAll" parameterType="com.b2.sinnanda.vo.User" resultType="String">
+		SELECT member_level userLevel FROM member WHERE member_id = #{userId} AND member_pw = #{userPw}
+		UNION
+		SELECT member_level userLevel FROM host WHERE host_id = #{userId} AND host_pw = #{userPw}
+		UNION
+		SELECT member_level userLevel FROM admin WHERE admin_id = #{userId} AND admin_pw = #{userPw}
+	</select>
+	
+	<!-- [이승준] 회원 로그인 정보 조회 -->
+	<select id="selectMemberLogin" parameterType="com.b2.sinnanda.vo.Member" resultType="com.b2.sinnanda.vo.Member">
+		SELECT member_no memberNo, 
+			   member_id memberId, 
+			   member_pw memberPw, 
+			   member_name memberName, 
+			   member_age memberAge, 
+			   member_tel memberTel, 
+			   member_email memberEmail, 
+			   member_active memberActive, 
+			   member_level memberLevel, 
+			   create_date createDate, 
+			   update_date updateDate 
+		FROM member WHERE member_id = #{memberId} AND member_pw = #{memberPw}
+	</select>
+	
+	<!-- [이승준] 사업자 로그인 정보 조회 -->
+	<select id="selectHostLogin" parameterType="com.b2.sinnanda.vo.Host" resultType="com.b2.sinnanda.vo.Host">
+		SELECT host_no hostNo, 
+			host_id hostId, 
+			host_pw hostPw, 
+			host_name hostName, 
+			host_tel hostTel, 
+			host_active hostActive, 
+			member_level memberLevel, 
+			create_date createDate, 
+			update_date updateDate 
+		FROM host WHERE host_id= #{hostId} AND host_pw= #{hostPw}
+	</select>
+	
+	<!-- [이승준] 관리자 로그인 정보 조회 -->
+	<select id="selectAdminLogin" parameterType="com.b2.sinnanda.vo.Admin" resultType="com.b2.sinnanda.vo.Admin">
+		SELECT 
+			admin_no adminNo,
+			admin_id adminId,
+			admin_pw adminPw,
+			admin_position_no adminPositionNo,
+			admin_name adminName,
+			member_level memberLevel,
+			create_date createDate,
+			update_date updateDate
+		FROM admin WHERE admin_id = #{adminId} AND admin_pw = #{adminPw}
+	</select>  
+</mapper>
