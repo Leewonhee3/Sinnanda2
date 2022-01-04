@@ -78,6 +78,7 @@
 												<th>숙소이름</th>
 												<th>컴플레인 종류</th>
 												<th style="width: 15%;">작성일</th>
+												<th style="width: 10%;">상세보기</th>
 											</tr>
 											
 											<c:forEach items="${myComplainList}" var="complain">

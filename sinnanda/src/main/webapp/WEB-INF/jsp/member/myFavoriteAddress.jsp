@@ -8,6 +8,9 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- plugins:css -->
+		<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/animate.css">
 	
 	<link rel="stylesheet" href="/skydash/vendors/feather/feather.css">
 	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
@@ -23,10 +26,9 @@
 	<!-- endinject -->
 	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
-<title>탈퇴 페이지</title>
-
+	<title>자주 방문한 지역 차트 페이지</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
 </head>
 <body>
 	<div class="container-scroller">
@@ -48,48 +50,27 @@
 				<div class="content-wrapper">
 					<!-- 내용1 -->
 					<div class="row">
+						<h2>자주방문한지역</h2>
 						<div class="col-md-12 grid-margin stretch-card">
 							<div class="card position-relative">
 								<div class="card-body">
-									<span class="subheading">
-										<a href="myPage?memberNo=${loginUser.member.memberNo}">메인(내정보)</a> >
-										회원탈퇴
-									</span>
-									
-									<h1 style="margin-top: 10px;"><strong>회원탈퇴</strong></h1>
-								
-									<div class="container">
-										<form id="memberOut" method="post" action="member/memberOutForm">
-											<table class="table table-myPage" style="width: 100%;">
-												<tr>
-													<th style="width: 10%; text-align:center;">회원 ID</th>
-													<td><input type="text" name="memberId" class="form-control" value="${loginUser.member.memberId}" readonly></td>
-												</tr>
-												<tr>
-													<th style="text-align:center;">회원 PW</th>
-													<td><input type="password" name="memberPw" id="memberPw" class="form-control" placeholder="비밀번호 입력"></td>
-												</tr>
-												<tr>
-													<th style="text-align:center;">탈퇴 사유</th>
-													<td>
-														<select id="outReason" name="outReason" class="form-control">
-															<option value="기타" selected>기타</option>
-															<option value="서비스 불친절">서비스 불친절</option>
-															<option value="서비스 이용 불편">서비스 이용 불편</option>
-														</select>
-													</td>
-												</tr>								
-											</table>
-											<div style="margin: 10px;">
-												<button onclick="return checkPw_form()" type = "button" class="btn btn-primary">탈퇴</button>
-											</div>
-										</form>
-									</div>
+									<!--  -->
 								</div>
 							</div>
 						</div>
 					</div>
-							
+					
+					<div class="row">
+						<h2>아아</h2>
+						<div class="col-md-12 grid-margin stretch-card">
+							<div class="card position-relative">
+								<div class="card-body">
+									<!--  -->
+								</div>
+							</div>
+						</div>
+					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -98,45 +79,8 @@
 	<!-- [이승준] 하단 Footer - SATRT -->
 	<%@ include file="/WEB-INF/partials/footer.jsp" %>
 	<!-- [이승준] 하단 Footer - END -->
-	
-	<!-- [유동진] 유효성검사 -->
-	<script>
-  		var checkedPw = false;
-  		
-  		$('#memberPw').focusout(function() {
-  			let memberPw = $('#memberPw').val();
-  			if(memberPw != '') {
-	  			$.ajax({
-	  				type: 'get', 
-	  				url: '/chkPw?memberPw=' + memberPw, 
-	  				success: function(checkResult) {  					
-	  					if(checkResult == "1") {	//	Pw가 일치할 경우 탈퇴  						
-	  						checkedPw = true;
-	  					}		
-	  					if(checkResult != "1") {	//	Pw가 일치하지 않을 경우 탈퇴불가
-	  						
-	  						checkedPw = false;
-	  					}
-	  				}
-				})
-  			}
-  		})
-  		
-  		function checkPw_form() {
-  			if($('#memberPw').val()==''){
-				alert("Password를 입력하세요.");
-				return false;
-			} if(checkedPw == false) {
-				alert("비밀번호가 일치하지 않습니다.");
-				return false;
-			} else {
-				alert("탈퇴가 성공적으로 이루어졌습니다. 안녕히가세요 뉴_뉴 ㅠㅠ ...");
-			}
-		
-			$('#memberOut').submit();
-		}
-	</script>
-	
+
+
   <!-- plugins:js -->
   <script src="/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
