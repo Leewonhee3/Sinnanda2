@@ -90,7 +90,8 @@
 									<h1 style="margin-top: 10px;"><strong>사업자문의 작성</strong></h1>
 									
 									<div class="container" style="margin-top: 20px;">										
-										<form onsubmit="return formCheck()" id="addHostQnaForm" action="addHostQna" method="post">
+										<form onsubmit="return formCheck()" id="addHostQnaForm" action="addHostQna" 
+												method="post" enctype="multipart/form-data">
 											<input id="hostNo" name="hostNo" type="hidden" value="${loginUser.host.hostNo}">
 											
 											<table class="table table-myPage" style="width: 100%;">
@@ -124,7 +125,7 @@
 												<tr>
 													<th>파일 업로드</th>
 													<td>
-														<input id="hostQnaUploadFile" name="hostQnaUploadFile" type="file">
+														<input id="upload" name="upload" type="file">
 													</td>
 												</tr>
 											</table>

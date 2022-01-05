@@ -190,7 +190,7 @@ public class MemberService {
 		dl.p("MemberService", "getMyReviewListByReviewRecommend()", "totalCount : "+totalCount);
 		
 		lastPage = totalCount / rowPerPage;
-		if(totalCount % rowPerPage !=0) {
+		if(totalCount % rowPerPage !=0 || lastPage == 0) {
 			lastPage += 1;
 		}
 		
@@ -238,7 +238,7 @@ public class MemberService {
 		dl.p("MemberService", "getMyReserveList()", "totalCount : "+totalCount);
 		
 		lastPage = totalCount / rowPerPage;
-		if(totalCount % rowPerPage !=0) {
+		if(totalCount % rowPerPage !=0 || lastPage == 0) {
 			lastPage += 1;
 		}
 		
@@ -293,7 +293,7 @@ public class MemberService {
 		dl.p("MemberService", "getMyComplainList()", "totalCount : "+totalCount);
 		
 		lastPage = totalCount / rowPerPage;
-		if(totalCount % rowPerPage !=0) {
+		if(totalCount % rowPerPage !=0 || lastPage == 0) {
 			lastPage += 1;
 		}
 		

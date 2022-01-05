@@ -93,7 +93,7 @@
 													<c:if test="${empty hostQna.hostQnaUploadFile}">
 														파일 없음
 													</c:if>
-													${hostQna.hostQnaUploadFile}
+													<img src="${pageContext.request.contextPath}/images/hostQna/${hostQna.hostQnaUploadFile}" style="width:500px; height:500px; border-radius:10px;">
 												</td>
 											</tr>
 										</table>

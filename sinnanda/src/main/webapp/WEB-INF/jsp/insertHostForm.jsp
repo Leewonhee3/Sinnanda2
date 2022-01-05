@@ -101,7 +101,7 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text" style="width: 80px;">전화번호</span>
 										</div>
-										<input type="text" class="form-control" name="hostTel" id="hostTel" placeholder="전화번호">
+										<input type="text" class="form-control" name="hostTel" id="hostTel" placeholder="전화번호 ex)010-0000-0000">
 									</div>
 									<!-- 사업자 주소 -->
 									<div class="input-group mb-3 input-group-sm">
@@ -261,6 +261,10 @@
 			}
 			if($('#hostTel').val()==''){
 				alert("번호를 입력하세요.");
+				return false;
+			}
+			if($('#hostTel').val().length < 13){
+				alert("번호를 형식에 맞게 입력하세요.");
 				return false;
 			}
 			if($('#addressInfo').val()==''){

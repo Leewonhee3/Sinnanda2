@@ -1,5 +1,8 @@
 package com.b2.sinnanda.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,13 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.b2.sinnanda.commons.DL;
 import com.b2.sinnanda.service.HostQnaService;
-import com.b2.sinnanda.vo.ComplainComment;
 import com.b2.sinnanda.vo.HostQna;
 import com.b2.sinnanda.vo.HostQnaComment;
-import com.b2.sinnanda.vo.Qna;
 import com.b2.sinnanda.vo.User;
 
 import lombok.extern.slf4j.Slf4j;
@@ -190,9 +192,38 @@ public class HostQnaController {
 		return "host/addHostQna";
 	}
 	@PostMapping("/host/addHostQna")
-	public String addHostQna(HostQna hostQna) {
+	public String addHostQna(HttpSession session, MultipartFile[] upload, HostQna hostQna) {
 		log.debug("[Debug] \"START\" HostQnaController.addHostQna() | Post");
 		log.debug(" ├[param] hostQna : "+hostQna.toString());
+		log.debug(" ├[param] upload : "+upload);
+		
+		//	파일이 업로드 될 경로 설정 
+		String saveDir = session.getServletContext().getRealPath("/images/hostQna"); 
+		
+		//	파일 업로드 
+		for(MultipartFile f : upload) {
+			if(!f.isEmpty()) {
+				// 기존 파일 이름을 받고 확장자 저장
+				String orifileName = f.getOriginalFilename(); 
+				String ext = orifileName.substring(orifileName.lastIndexOf(".")); 
+				
+				// 이름 값 변경을 위한 설정 
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmssSSS"); 
+				int rand = (int)(Math.random()*1000); 
+				
+				// 파일 이름 변경 
+				String reName = sdf.format(System.currentTimeMillis()) + "_" + rand + ext; 
+				
+				// 파일 저장 
+				try { 
+					f.transferTo(new File(saveDir + "/" + reName));
+					//	rename한 파일이름을 데이터에 추가
+					hostQna.setHostQnaUploadFile(reName);
+				}catch (IllegalStateException | IOException e) {
+					e.printStackTrace(); 
+				} 
+			} 
+		} 
 		
 		hostQnaService.addHostQna(hostQna);
 		
