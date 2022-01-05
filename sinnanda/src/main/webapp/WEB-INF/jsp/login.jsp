@@ -8,16 +8,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>로그인</title>
 	<!-- plugins:css -->
-	<link rel="stylesheet" href="/skydash/vendors/feather/feather.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" href="/skydash/vendors/css/vendor.bundle.base.css">
+	<link rel="stylesheet" href="skydash/vendors/feather/feather.css">
+	<link rel="stylesheet" href="skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" href="skydash/vendors/css/vendor.bundle.base.css">
 	<!-- endinject -->
 	<!-- Plugin css for this page -->
 	<!-- End plugin css for this page -->
 	<!-- inject:css -->
-	<link rel="stylesheet" href="/skydash/css/vertical-layout-light/style.css">
+	<link rel="stylesheet" href="skydash/css/vertical-layout-light/style.css">
 	<!-- endinject -->
-	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
+	<link rel="shortcut icon" href="skydash/images/favicon.png" />
 </head>
 
 <!-- 해당 페이지에서 Enter 키를 입력 시 로그인 -->
@@ -30,7 +30,7 @@
 						<div class="auth-form-light text-left py-5 px-4 px-sm-5">
 							<!-- [이승준] 로그인 본문 - 브랜드 로고 부분 -->
 							<div class="brand-logo" style="text-align: center;">
-								<a href="index"><img src="/images/logo/logo_myPage.svg" alt="logo"></a>
+								<a href="index"><img src="images/logo/logo_myPage.svg" alt="logo"></a>
 							</div>
 							
 							<h4 style="text-align: center; margin-bottom: 20px;">신난다에 오신 것을 환영합니다!</h4>
@@ -72,16 +72,16 @@
 	</div>
 	<!-- container-scroller -->
 	<!-- plugins:js -->
-	<script src="/skydash/vendors/js/vendor.bundle.base.js"></script>
+	<script src="skydash/vendors/js/vendor.bundle.base.js"></script>
 	<!-- endinject -->
 	<!-- Plugin js for this page -->
 	<!-- End plugin js for this page -->
 	<!-- inject:js -->
-	<script src="/skydash/js/off-canvas.js"></script>
-	<script src="/skydash/js/hoverable-collapse.js"></script>
-	<script src="/skydash/js/template.js"></script>
-	<script src="/skydash/js/settings.js"></script>
-	<script src="/skydash/js/todolist.js"></script>
+	<script src="skydash/js/off-canvas.js"></script>
+	<script src="skydash/js/hoverable-collapse.js"></script>
+	<script src="skydash/js/template.js"></script>
+	<script src="skydash/js/settings.js"></script>
+	<script src="skydash/js/todolist.js"></script>
   <!-- endinject -->
 	<script>
 		// 입력사항 확인
