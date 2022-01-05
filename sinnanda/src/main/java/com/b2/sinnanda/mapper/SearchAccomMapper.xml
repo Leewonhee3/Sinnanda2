@@ -92,15 +92,39 @@
     			</foreach>
 				AND
 				a.accom_name LIKE CONCAT('%',#{accomName},'%')
-				  <![CDATA[
-				GROUP BY a.accom_name HAVING(accom_rate <=  
-				]]>
-				<foreach collection="accomRate" item="rank" index="idx" separator="," open="" close="">
+				  
+				GROUP BY a.accom_name HAVING
+				<foreach collection="accomRate" item="rank" index="idx" separator=" OR " open="(" close=")">
 					<if test="rank eq 1" >
-						1.9 OR accom_rate IS NULL
+					<![CDATA[
+						accom_rate <= 1.9 OR accom_rate IS NULL
+					]]>
+					</if>
+					
+					<if test="rank eq 2" >
+					<![CDATA[
+					    accom_rate >= 2.0 AND accom_rate <= 2.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 3" >
+					<![CDATA[	
+						accom_rate >= 3.0 AND accom_rate <= 3.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 4" >
+					<![CDATA[	
+						accom_rate >= 4.0 AND accom_rate <= 4.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 5" >
+					<![CDATA[	
+						accom_rate >= 5.0 
+					]]>
 					</if>
 				</foreach>
-				)
 				ORDER BY a.create_date DESC 
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
@@ -139,9 +163,39 @@
     			</foreach>
 				AND
 				a.accom_name LIKE CONCAT('%',#{accomName},'%')
-				  <![CDATA[
-				GROUP BY a.accom_name HAVING(accom_rate <=1.9 OR accom_rate IS NULL)
-				]]>) result
+				GROUP BY a.accom_name HAVING
+				<foreach collection="accomRate" item="rank" index="idx" separator=" OR " open="(" close=")">
+					<if test="rank eq 1" >
+					<![CDATA[
+						accom_rate <= 1.9 OR accom_rate IS NULL
+					]]>
+					</if>
+					
+					<if test="rank eq 2" >
+					<![CDATA[
+					    accom_rate >= 2.0 AND accom_rate <= 2.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 3" >
+					<![CDATA[	
+						accom_rate >= 3.0 AND accom_rate <= 3.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 4" >
+					<![CDATA[	
+						accom_rate >= 4.0 AND accom_rate <= 4.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 5" >
+					<![CDATA[	
+						accom_rate >= 5.0 
+					]]>
+					</if>
+				</foreach>
+				) result
 	</select>
 	
 	<!-- [이원희] 검색 대상 숙소 별점 조회 -->
@@ -161,9 +215,40 @@
     			</foreach>
 				AND
 				a.accom_name LIKE CONCAT('%',#{accomName},'%')
-		<![CDATA[
-				GROUP BY a.accom_name HAVING(accom_rate <=1.9 OR accom_rate IS NULL)
-				]]> ORDER BY a.create_date DESC
+		
+				GROUP BY a.accom_name HAVING
+				<foreach collection="accomRate" item="rank" index="idx" separator=" OR " open="(" close=")">
+					<if test="rank eq 1" >
+					<![CDATA[
+						accom_rate <= 1.9 OR accom_rate IS NULL
+					]]>
+					</if>
+					
+					<if test="rank eq 2" >
+					<![CDATA[
+					    accom_rate >= 2.0 AND accom_rate <= 2.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 3" >
+					<![CDATA[	
+						accom_rate >= 3.0 AND accom_rate <= 3.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 4" >
+					<![CDATA[	
+						accom_rate >= 4.0 AND accom_rate <= 4.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 5" >
+					<![CDATA[	
+						accom_rate >= 5.0 
+					]]>
+					</if>
+				</foreach>
+		ORDER BY a.create_date DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	

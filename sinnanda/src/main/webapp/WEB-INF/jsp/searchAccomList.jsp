@@ -275,7 +275,7 @@
 		 												</p>
 	 												</c:when>
 	 												<c:otherwise>
-	 													<p style="WIDTH:${accomRankList[status.index]}%; PADDING-RIGHT:0px; PADDING-LEFT:0px; BACKGROUND: url(icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+	 													<p style="WIDTH:${(accomRankList[status.index]*2)*10}%; PADDING-RIGHT:0px; PADDING-LEFT:0px; BACKGROUND: url(icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
 		 												</p>
 	 												</c:otherwise>
  												</c:choose>
