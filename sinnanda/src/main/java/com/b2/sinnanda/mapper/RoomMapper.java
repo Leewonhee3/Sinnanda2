@@ -15,4 +15,7 @@ public interface RoomMapper {
 	
 	// [이승준] (개수)"객실 개수" 조회
 	int selectRoomTotalCount(int accomNo);
+	
+	// [이승준] (상셰)"객실 상세" 조회
+	Room selectRoomOne(int roomNo);
 }

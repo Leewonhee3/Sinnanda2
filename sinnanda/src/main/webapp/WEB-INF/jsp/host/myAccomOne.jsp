@@ -54,13 +54,15 @@
 									<span class="subheading" style="margin-left: 10px;">
 										<a href="hostPage?hostNo=${loginUser.host.hostNo}">메인</a> > 
 										<a href="myAccomList">숙소 목록</a> > 
-										숙소 상세보기
+										숙소 상세
 									</span>
 									
 									<h1 style="margin-top: 10px;"><strong>사업자 숙소 상세보기</strong></h1>
 									
 									<div class="container">
-										<table class="table table-myPage" style="width: 100%;">
+										<h2 style="margin: 20px;"><strong>숙소 정보</strong></h2>
+										
+										<table class="table table-myPage">
 											<tr>
 												<th style="width: 15%;">숙소 번호</th>
 												<td>${accom.accomNo}</td>
@@ -100,14 +102,100 @@
 													<fmt:formatDate value="${createDate}" pattern="yy/MM/dd HH:mm"/>
 												</td>
 											</tr>
+											<tr>
+												<th>카테고리들</th>
+												<td>
+													<c:forEach items="${accom.accomCategoryInven}" var="accomCategories">
+														[${accomCategories.accomCategoryInvenNo}
+														${accomCategories.accomCategory.accomCategoryName}
+														${accomCategories.accomCategory.accomCategoryImg}]
+													</c:forEach>
+												</td>
+											</tr>
+											<tr>
+												<th>편의시설들</th>
+												<td>
+													<c:forEach items="${accom.accomComfortInven}" var="accomComforts">
+														[${accomComforts.accomComfort.accomComfortName}]
+													</c:forEach>
+												</td>
+											</tr>
 										</table>
 										
 										<!-- 구분선 -->
 										<hr class="myPage-line">
 										
-										<!-- 답변 부분 -->
-										<h2><strong>관리자 답변</strong></h2>
+										<h2 style="margin: 20px;"><strong>객실 정보</strong><span style="color: blue;">(${accom.roomCount})</span></h2>
+										<table class="table table-myPage">
+											<tr>
+												<th style="width: 15%;">이름</th>
+												<th>설명</th>
+												<th>인원</th>
+												<th>가격</th>
+												<th>체크인</th>
+												<th>체크아웃</th>
+												<th>대실여부</th>
+												<th>등록일 </th>
+											</tr>
+											<c:forEach items="${accom.rooms}" var="room">
+												<tr>
+													<td style="text-align: center;">
+														<a href="myRoomOne?roomNo=${room.roomNo}">${room.roomName}</a>
+													</td>
+													<td style="text-align: center;">${room.roomDescription}</td>
+													<td style="text-align: center;">${room.roomPerson}</td>
+													<td style="text-align: center;">${room.roomPrice}</td>
+													<td style="text-align: center;">${room.roomUse}</td>
+													<td style="text-align: center;">${room.roomCheckIn}</td>
+													<td style="text-align: center;">${room.roomCheckOut}</td>
+													<td style="text-align: center;">
+														<fmt:parseDate value="${room.createDate}" var="createDate" pattern="yyyy-MM-dd HH:mm:ss.S" />
+														<fmt:formatDate value="${createDate}" pattern="yy/MM/dd"/>
+													</td>
+												</tr>
+											</c:forEach>
+										</table>
 										
+										<!-- Paging -->			
+										<div class="row mt-5">
+									    	<div class="col text-center">
+									            <div class="block-27">
+													<ul>
+														<!-- '이전' 버튼 -->
+														<c:if test="${beginRow >= ROW_PER_PAGE}">
+															<li><a href="myAccomOne?accomNo=${accom.accomNo}&currentPage=${currentPage-1}">&lt;</a></li>
+														</c:if>
+														
+														<!-- Page 번호 -->
+														<c:set var="doneLoop" value="false"></c:set>
+														<c:forEach var="i" begin="${pageNo}" end="${pageNo + 9}">
+														
+															<!-- Page 숫자 10개 출력 -->
+															<c:if test="${not doneLoop}">
+																<c:choose>
+																	<c:when test="${currentPage == i}">				
+																		<li class="active"><span>${i}</span></li>
+																	</c:when>
+												    				<c:otherwise>
+																		<li><a href="myAccomOne?accomNo=${accom.accomNo}&currentPage=${i}">${i}</a></li>	
+																	</c:otherwise>		
+																</c:choose>
+																<!-- LastPage이면 다음 페이지 번호를 출력하지 않는다 -->
+																<c:if test="${i == lastPage}">
+																	<c:set var="doneLoop" value="true"></c:set>
+																</c:if>
+															</c:if>
+														</c:forEach>
+														
+														<!-- '다음' 버튼 -->
+														<c:if test="${currentPage != lastPage}">
+															<li><a href="myAccomOne?accomNo=${accom.accomNo}&currentPage=${currentPage+1}">&gt;</a></li>
+														</c:if>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<!-- Paging -->
 									</div>
 								</div>
 							</div>

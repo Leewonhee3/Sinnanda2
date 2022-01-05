@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.b2.sinnanda.commons.DL;
 import com.b2.sinnanda.mapper.AccomCategoryMapper;
+import com.b2.sinnanda.mapper.AccomComfortMapper;
 import com.b2.sinnanda.mapper.AccomMapper;
 import com.b2.sinnanda.mapper.RoomMapper;
 import com.b2.sinnanda.vo.Accom;
@@ -23,6 +24,8 @@ public class AccomService {
 	private AccomCategoryMapper accomCategoryMapper;
 	@Autowired
 	private RoomMapper roomMapper;
+	@Autowired
+	private AccomComfortMapper accomComfortMapper;
 	@Autowired
 	private DL dl;
 	
@@ -56,6 +59,8 @@ public class AccomService {
 		
 		// 5. "숙소의 카테고리 목록" 조회
 		accom.setAccomCategoryInven(accomCategoryMapper.selectAccomCategoryList(accomNo));
+		
+		accom.setAccomComfortInven(accomComfortMapper.selectAccomComfortList(accomNo));
 		
 		// 6. "객실 목록" 조회를 위한 데이터 가공
 		Map<String, Object> paramRoomListMap = new HashMap<>();

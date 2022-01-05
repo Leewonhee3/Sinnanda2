@@ -1,7 +1,5 @@
 package com.b2.sinnanda.vo;
 
-import java.util.List;
-
 import lombok.Data;
 
 @Data

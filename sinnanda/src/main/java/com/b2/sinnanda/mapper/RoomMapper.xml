@@ -43,4 +43,44 @@
 		FROM room
 		WHERE accom_no = #{accomNo}
 	</select>
+	
+	<!-- [이승준] (상세)"객실 상세" 조회 resultMap -->
+	<resultMap type="com.b2.sinnanda.vo.Room" id="roomOneMap">
+		<id column="room_no" property="roomNo"/>
+		<result column="accom_no" property="accomNo"/>
+		<result column="room_name" property="roomName"/>
+		<result column="room_main_img" property="roomMainImg"/>
+		<result column="room_person" property="roomPerson"/>
+		<result column="room_price" property="roomPrice"/>
+		<result column="room_check_in" property="roomCheckIn"/>		
+		<result column="room_check_out" property="roomCheckOut"/>
+		<result column="room_use" property="roomUse"/>
+		<result column="create_date" property="createDate"/>
+		<result column="update_date" property="updateDate"/>
+		
+		<collection property="accom" ofType="com.b2.sinnanda.vo.Accom">
+			<result column="accom_name" property="accomName"/>
+		</collection>
+	</resultMap>
+	<!-- [이승준] (상세)"객실 상세" 조회 -->
+	<select id="selectRoomOne" parameterType="int" resultMap="roomOneMap">
+		SELECT 
+			r.room_no, 
+			r.accom_no, 
+			a.accom_name, 
+			r.room_name, 
+			r.room_main_img, 
+			r.room_description, 
+			r.room_person, 
+			r.room_price, 
+			r.room_check_in, 
+			r.room_check_out, 
+			r.room_use, 
+			r.create_date, 
+			r.update_date
+		FROM room r 
+			LEFT JOIN accom a ON a.accom_no = r.accom_no
+		WHERE r.room_no = #{roomNo}
+	</select>
+	
 </mapper>

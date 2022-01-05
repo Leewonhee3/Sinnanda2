@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.b2.sinnanda.mapper.RoomImgMapper">
+<!-- #인덱스 (작성자 : 이승준)
+	1. 조회
+		
+		
+	2. 삽입
+		
+		
+	3. 수정
+		
+		
+	4. 삭제
+		
+
+ -->
+
+<!-- 1. 조회 -->
+	<select id="selectRoomImgList" parameterType="int" resultType="com.b2.sinnanda.vo.RoomImg">
+		SELECT 
+			room_img_no roomImgNo, 
+			room_img_file roomImgFile
+		FROM room_img 
+		WHERE room_no = #{roomNo}
+	</select>
+</mapper>
