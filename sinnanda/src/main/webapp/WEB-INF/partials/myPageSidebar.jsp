@@ -70,7 +70,7 @@
 			<div class="collapse" id=member-statistics>
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item"> <a class="nav-link" href="/member/memberUseChart">이용횟수</a></li>
-					<li class="nav-item"> <a class="nav-link" href="/member/">자주 방문한 숙소</a></li>
+					<li class="nav-item"> <a class="nav-link" href="/member/myFavoriteAddress">지역별 방문 횟수</a></li>
 					<li class="nav-item"> <a class="nav-link" href="/member/">자주 방문한 지역</a></li>
 				</ul>
 			</div>

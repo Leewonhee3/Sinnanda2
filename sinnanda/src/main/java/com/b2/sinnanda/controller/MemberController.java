@@ -439,7 +439,7 @@ public class MemberController {
        return "/member/memberUseChart";    
     }
     
-  // [유동진] 자주 방문한 지역 
+    // [유동진] 지역별 방문 횟수
     @GetMapping("member/myFavoriteAddress")
     public String getmyMavoriteAddress() {
 		return "member/myFavoriteAddress";

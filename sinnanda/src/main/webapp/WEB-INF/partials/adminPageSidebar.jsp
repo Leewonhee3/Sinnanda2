@@ -80,6 +80,7 @@
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item"> <a class="nav-link" href="/admin/incomeChart">정산</a></li>
 					<li class="nav-item"> <a class="nav-link" href="/admin/totalMemberYear">회원 관련 통계</a></li>
+					<li class="nav-item"> <a class="nav-link" href="/admin/totalMemberOutYear">탈퇴 이유 관련 통계</a></li>
 					<li class="nav-item"> <a class="nav-link" href="/admin/totalHostYear">사업자 관련 통계</a></li>
 					<li class="nav-item"> <a class="nav-link" href="/admin/totalAccomYear">숙소 관련 통계</a></li>
 				</ul>

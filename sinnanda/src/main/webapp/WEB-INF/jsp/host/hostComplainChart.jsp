@@ -65,7 +65,8 @@
 									<div class="container">
 										<div>
 											<select id="yearNo" name="yearNo"  class="form-control-sm" style="float: right; margin-bottom: 20px; height:33px;">
-												<option value="">선택</option>            
+												<option value="">선택</option>   
+												<option value="2022">2022년</option>         
 												<option value="2021">2021년</option>
 												<option value="2020">2020년</option>
 											</select>

@@ -361,4 +361,11 @@ public class AdminController {
 		return "/admin/totalAccomYear";
     	  
       }
+      
+      
+      //[윤경환] 년도에 따른 맴버 탈퇴 이유 
+      @GetMapping("/admin/totalMemberOutYear")
+      public String getTotalMemberOutYear() {
+    	  return "/admin/totalMemberOutYear";
+      }
 }

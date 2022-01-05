@@ -198,7 +198,6 @@ public class AdminService {
 	}
 	
 	//[윤경환] 년도에 따라 회원가입 한 사업주 수 
-	
 	public Map <String, Object> getTotalHostYear(int year){
 		Map<String, Object>  map = adminMapper.TotalHostYear(year);
 		return map;
@@ -220,5 +219,14 @@ public class AdminService {
 		return map;
 	}
 	
+	
+	//[윤경환] 년도에 따른 맴버 탈퇴 회원 이유 
+		public Map <String, Object> getTotalMemberOutYear(int year){
+			Map<String, Object>  map = adminMapper.TotalMemberOutYear(year);
+			
+			
+			log.debug("map++++++++++"+map);
+			return map;
+		}
 
 }

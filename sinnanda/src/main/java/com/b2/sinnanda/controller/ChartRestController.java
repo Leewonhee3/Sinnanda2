@@ -72,6 +72,16 @@ public class ChartRestController {
         	 
          }
          
+         //[윤경환] 년도에 따른 탈퇴 회원 이유 
+         @GetMapping("/admin/getTotalMemberOutYear")
+         public Map<String, Object> MemberOutYear(@RequestParam(name="year") int year){
+					
+        	 Map<String,Object> map = adminService.getTotalMemberOutYear(year);
+        	 dl.p("ChartRestController", "MemberOutYear", map);
+        	 return map;
+        	 
+         }
+         
          //[윤경환] '호스트' 숙소에 따른 정산
          @GetMapping("/host/getmyHostRevenue")
          public Map<String,Object> myHostRevenue(@RequestParam(name ="year") int year,
@@ -158,5 +168,18 @@ public class ChartRestController {
       	   return map;  
          }
          
+         // [유동진] 지역별 방문 횟수 
+         @GetMapping("/member/getMyFavoriteAddress")
+         public Map<String,Object> myFavoriteAddress(HttpSession session, 
+        		 									@RequestParam(name ="year") int year,
+        		 									@RequestParam(defaultValue = "전체") String sido) {
+      	   
+      	   User loginUser = (User)session.getAttribute("loginUser");
+      	   dl.p("ChartRestController", "favoriteAddress()", "loginUser : " + loginUser);
+      	   
+      	   Map<String,Object> map = memberService.getMyFavoriteAddress(year, loginUser.getMember().getMemberNo(), sido);
+      
+      	   return map;  
+         }
          
 }

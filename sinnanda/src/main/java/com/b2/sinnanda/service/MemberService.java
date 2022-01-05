@@ -323,6 +323,12 @@ public class MemberService {
 		Map<String, Object>  map = memberMapper.memberUseYear(year, memberNo);
 		return map;
 	}
+	
+	// [유동진] 지역별 방문 횟수
+	public Map <String, Object> getMyFavoriteAddress(int year, int memberNo, String sido){
+		Map<String, Object>  map = memberMapper.myFavoriteAddress(year, memberNo, sido);
+		return map;
+	}
 
 	//	[김영후] 회원 이메일 인증
 	public int certifyMember(Member member) {
