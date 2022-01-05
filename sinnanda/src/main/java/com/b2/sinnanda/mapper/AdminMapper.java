@@ -74,5 +74,10 @@ public interface AdminMapper {
  	
  	//[윤경환] 날짜에 따른 숙소 종류 수 
  	Map<String,Object> TotalAccomYear(int year, String accomName);
+ 	
+ 	//[윤경환] 년도에 따른 탈퇴 회원 이유 
+ 	Map<String,Object> TotalMemberOutYear(int year);
+ 	
+ 	
 
 }

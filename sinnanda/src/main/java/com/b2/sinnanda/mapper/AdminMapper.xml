@@ -375,9 +375,8 @@
 		WHERE YEAR(create_date) = #{year}
 
 	</select>
-	<!-- 숙바 관련하여 년도와 종류에 따른 분류  -->
 	
-	
+	<!-- [윤경환]숙박 관련하여 년도와 종류에 따른 분류  -->
 	<select id="TotalAccomYear" parameterType="com.b2.sinnanda.vo.Accom" resultType="java.util.Map">
 		SELECT 
 			count(CASE WHEN MONTH(a.create_date) =1 THEN a.accom_no END) january,
@@ -401,6 +400,17 @@
 				</where>
 			</if>
 		AND YEAR(a.create_date)=#{year} 	
-		
 	</select>
+	
+	
+	<!-- [윤경환] 탈퇴 회원 년도에 따른 이유  -->
+	<select id="TotalMemberOutYear" parameterType="Map" resultType="java.util.Map">
+			SELECT 
+					IFNULL(sum(out_reason = '서비스 이용 불편'),0) out1,
+					IFNULL(sum(out_reason = '서비스 불친절'),0) out2,
+					IFNULL(sum(out_reason = '기타'),0) out3
+			FROM member_out
+			WHERE YEAR(out_date) = #{year}
+	</select>
+	
 </mapper>

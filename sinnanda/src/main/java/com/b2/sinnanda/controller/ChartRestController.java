@@ -72,6 +72,16 @@ public class ChartRestController {
         	 
          }
          
+         //[윤경환] 년도에 따른 탈퇴 회원 이유 
+         @GetMapping("/admin/getTotalMemberOutYear")
+         public Map<String, Object> MemberOutYear(@RequestParam(name="year") int year){
+					
+        	 Map<String,Object> map = adminService.getTotalMemberOutYear(year);
+        	 dl.p("ChartRestController", "MemberOutYear", map);
+        	 return map;
+        	 
+         }
+         
          //[윤경환] '호스트' 숙소에 따른 정산
          @GetMapping("/host/getmyHostRevenue")
          public Map<String,Object> myHostRevenue(@RequestParam(name ="year") int year,

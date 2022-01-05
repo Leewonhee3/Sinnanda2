@@ -42,7 +42,7 @@
 		<div class="container-fluid page-body-wrapper">
 		
 			<!-- [이승준] 관리자 페이지 좌측 사이드바 - START -->
-			<%@ include file="/WEB-INF/partials/hostPageSidebar.jsp" %>
+			<%@ include file="/WEB-INF/partials/adminPageSidebar.jsp" %>
 			<!-- [이승준] 관리자페이지 좌측 사이드바 - END -->
 			
 			<!-- [이승준] 관리자 페이지 본문 - END -->
@@ -56,11 +56,11 @@
 							<div class="card position-relative">
 								<div class="card-body">
 									<span class="subheading">
-										<a href="hostPage?hostNo=${loginUser.host.hostNo}">메인</a> > 
+										<a href="adminPage?hostNo=${loginUser.admin.adminNo}">메인</a> > 
 										통계
 									</span>
 									
-									<h1 style="margin-top: 10px;"><strong>리뷰 빈도</strong></h1>
+									<h1 style="margin-top: 10px;"><strong>탈퇴 이유</strong></h1>
 									
 									<div class="container">
 										<div>
@@ -71,28 +71,21 @@
 												<option value="2020">2020년</option>
 											</select>
 												
-											<select id ="accom" name ="accomName" class="form-control-sm" style="float: right; margin-bottom: 20px; height:33px;">
-												<option value ="">숙소 선택</option>
-												<option value ="전체">전체</option>
-												<c:forEach  items="${accomHost}" var ="accom">
-													<option value ="${accom.accomName}">${accom.accomName}</option>
-												</c:forEach>
-											</select>
-										</div>
+											
 										
 										<div style="position: relative; height:60%; width:60%;" class="col-md-12">	
 											<canvas id="myChart"></canvas>
 										</div>
 									</div>
- 
+ 						</div>
    <script type="text/javascript">
    let ctx = document.getElementById('myChart').getContext('2d');
    let myChart = new Chart(ctx, {});
    
-   $('#yearNo, #accom').change(function(){
+   $('#yearNo').change(function(){
       
       let year = $('#yearNo').val();
-      let accomName = $('#accom').val();
+      
       
      
       
@@ -101,16 +94,16 @@
       
       $.ajax({
          type:'get',
-         url:'/host/getHostReviewChart?year=' + year+'&accomName='+accomName,
+         url:'/admin/getTotalMemberOutYear?year=' + year,
          success:function(json){
             console.log(json);
             
             
             //[윤경환] 회원가입을 한 회원수 
             let myData = [];
-            myData.push(json.Rev1);
-            myData.push(json.Rev2);
-            myData.push(json.Rev3);
+            myData.push(json.out1);
+            myData.push(json.out2);
+            myData.push(json.out3);
             
             
             
@@ -124,13 +117,14 @@
 
 					
           		
+          
           		
           	
             // chart.js
             myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ['추천','보통','비추천'],
+                    labels: ['서비스 이용 불편','서비스 불친절','기타'],
                     datasets: [{
                         label: '리뷰',
                         data: myData,
@@ -155,7 +149,7 @@
                 	 plugins: {
                          title: {
                              display: true,
-                             text: '# 총 리뷰 :'+ accomName+' :'+ result +'건'
+                             text: '# 총 탈퇴 이유 :'+ result +'건'
                              
                          }
                 		
