@@ -6,19 +6,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<!-- plugins:css -->
-	<link rel="stylesheet" href="/skydash/vendors/feather/feather.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" href="/skydash/vendors/css/vendor.bundle.base.css">
+	<link rel="stylesheet" href="skydash/vendors/feather/feather.css">
+	<link rel="stylesheet" href="skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" href="skydash/vendors/css/vendor.bundle.base.css">
 	
 	<!-- inject:css -->
-	<link rel="stylesheet" href="/skydash/css/vertical-layout-light/style.css">
+	<link rel="stylesheet" href="skydash/css/vertical-layout-light/style.css">
 	
 	<!-- endinject -->
-	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
+	<link rel="shortcut icon" href="skydash/images/favicon.png" />
 	
 	<!-- 지도 API 관련 태그 -->
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=882ef0b6751c864ad60f045a82f613ae&libraries=services"></script>	
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=882ef0b6751c864ad60f045a82f613ae&libraries=services"></script>	
 	<!-- 지도 API 관련 태그 -->
 	
 	<style>
@@ -52,7 +52,7 @@
 						<div class="auth-form-light text-left py-5 px-4 px-sm-5">
 							
 							<div class="brand-logo" style="text-align: center;">
-								<a href="index"><img src="/images/logo/logo_myPage.svg" alt="logo"></a>
+								<a href="index"><img src="images/logo/logo_myPage.svg" alt="logo"></a>
 							</div>
 							
 							<h4 style="font-weight: bold;">사업자 회원가입</h4>
@@ -127,7 +127,7 @@
 									<a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" onclick="return check_form()">회원가입 완료</a>
 								</div>
 								<div class="text-center mt-4 font-weight-light">
-									아이디를 가지고 계신가요? <a href="/login" class="text-primary">로그인 하기</a>
+									아이디를 가지고 계신가요? <a href="login" class="text-primary">로그인 하기</a>
 								</div>
 								<br>
 							</form>
@@ -139,13 +139,13 @@
 	</div>
 	
 	<!-- plugins:js -->
-	<script src="/skydash/vendors/js/vendor.bundle.base.js"></script>
+	<script src="skydash/vendors/js/vendor.bundle.base.js"></script>
 	<!-- inject:js -->
-	<script src="/skydash/js/off-canvas.js"></script>
-	<script src="/skydash/js/hoverable-collapse.js"></script>
-	<script src="/skydash/js/template.js"></script>
-	<script src="/skydash/js/settings.js"></script>
-	<script src="/skydash/js/todolist.js"></script>
+	<script src="skydash/js/off-canvas.js"></script>
+	<script src="skydash/js/hoverable-collapse.js"></script>
+	<script src="skydash/js/template.js"></script>
+	<script src="skydash/js/settings.js"></script>
+	<script src="skydash/js/todolist.js"></script>
   
 	<!-- [김영후] 유효성 검사 -->
 	<script>

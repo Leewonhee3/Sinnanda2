@@ -60,12 +60,12 @@
 			<div class="container2">
 				<select id="noticeCategory" name="noticeCategory" class="form-control-sm" onchange="location.href=this.value" style="float: right; margin-bottom: 20px;">
 					<option value="">선택</option>
-					<option value="/noticeList?noticeCategory=전체">전체문의</option>
-					<option value="/noticeList?noticeCategory=기타">기타</option>
-					<option value="/noticeList?noticeCategory=정보">정보</option>
-					<option value="/noticeList?noticeCategory=시스템">시스템</option>
-					<option value="/noticeList?noticeCategory=이벤트">이벤트</option>
-					<option value="/noticeList?noticeCategory=뉴스">뉴스</option>
+					<option value="noticeList?noticeCategory=전체">전체문의</option>
+					<option value="noticeList?noticeCategory=기타">기타</option>
+					<option value="noticeList?noticeCategory=정보">정보</option>
+					<option value="noticeList?noticeCategory=시스템">시스템</option>
+					<option value="noticeList?noticeCategory=이벤트">이벤트</option>
+					<option value="noticeList?noticeCategory=뉴스">뉴스</option>
 				</select>
 			</div>
 			<table class="table table-board" style="width: 100%;">
@@ -80,7 +80,7 @@
 					<tr style="background-color:LightGray;">
 						<td style="text-align:center">${p.noticeNo}</td>
 						<td>
-							<a href="/noticeOne?noticeNo=${p.noticeNo}">${p.noticeTitle}</a>
+							<a href="noticeOne?noticeNo=${p.noticeNo}">${p.noticeTitle}</a>
 						</td>
 						<td style="text-align:center">${p.noticeCategory}</td>
 						<td style="text-align:center">${p.adminName}</td>
@@ -94,7 +94,7 @@
 					<tr>
 						<td style="text-align:center">${n.noticeNo}</td>
 						<td>
-							<a href="/noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a>
+							<a href="noticeOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a>
 						</td>
 						<td style="text-align:center">${n.noticeCategory}</td>
 						<td style="text-align:center">${n.adminName}</td>
@@ -128,7 +128,7 @@
 											<li class="active"><span>${i}</span></li>
 										</c:when>
 					    				<c:otherwise>
-											<li><a href="/noticeList?currentPage=${i}&noticeCategory=${noticeCategory}">${i}</a></li>	
+											<li><a href="noticeList?currentPage=${i}&noticeCategory=${noticeCategory}">${i}</a></li>	
 										</c:otherwise>		
 									</c:choose>
 									<!-- LastPage이면 다음 페이지 번호를 출력하지 않는다 -->
