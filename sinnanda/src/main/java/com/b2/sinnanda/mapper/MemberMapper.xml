@@ -540,21 +540,21 @@
 		WHERE YEAR(reserve_date) = #{year} AND member_no = #{memberNo}
 	</select>
 	
-	<!-- [유동진] 자주 방문한 지역 -->
-	<select id ="favoriteAddress" parameterType="Map" resultType="java.util.Map">
+	<!-- [유동진] 지역별 방문 횟수 -->
+	<select id ="myFavoriteAddress" parameterType="Map" resultType="java.util.Map">
 	SELECT 
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =1 THEN addr.sido END),0) january,
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =2 THEN addr.sido END),0) february,
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =3 THEN addr.sido END),0) march,
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =4 THEN addr.sido END),0) april,
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =5 THEN addr.sido END),0) may,
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =6 THEN addr.sido END),0) june,
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =7 THEN addr.sido END),0) july,
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =8 THEN addr.sido END),0) august,
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =9 THEN addr.sido END),0) september,
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =10 THEN addr.sido END),0) october,
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =11 THEN addr.sido END),0) november,
-	   IFNULL(count(CASE WHEN MONTH(pa.update_date) =12 THEN addr.sido END),0) december
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =1 THEN addr.sido END),0) january,
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =2 THEN addr.sido END),0) february,
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =3 THEN addr.sido END),0) march,
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =4 THEN addr.sido END),0) april,
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =5 THEN addr.sido END),0) may,
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =6 THEN addr.sido END),0) june,
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =7 THEN addr.sido END),0) july,
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =8 THEN addr.sido END),0) august,
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =9 THEN addr.sido END),0) september,
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =10 THEN addr.sido END),0) october,
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =11 THEN addr.sido END),0) november,
+	   IFNULL(count(CASE WHEN MONTH(re.reserve_date) =12 THEN addr.sido END),0) december
 	FROM  payment pa 
 	LEFT JOIN reserve re
 	   ON pa.reserve_no = re.reserve_no
@@ -568,7 +568,7 @@
 	    ON acd.address_no = addr.address_no
 	 WHERE re.member_no = #{memberNo} 
 	    AND YEAR(pa.update_date) = #{year}
-	    AND re.reserve_use = #{reserveUse}
+	     AND re.reserve_use = '이용 완료'
 	    AND addr.sido = #{sido}
 	</select>
 	

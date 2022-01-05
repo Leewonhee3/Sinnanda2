@@ -77,14 +77,14 @@ public interface MemberMapper {
 	// [유동진] 내가 작성한 컴플레인 상세조회
 	Complain selectMyComplainOne(int complainNo);
 	
-	// [유동진] 결제 금액 조회
+	// [유동진] 결제 금액 조회 차트
 	Map<String, Object> memberPaymentYear(int year, int memberNo);
 	
-	// [유동진] 년도별 이용 횟수
+	// [유동진] 년도별 이용 횟수 차트
 	Map<String, Object> memberUseYear(int year, int memberNo);
 	
-	// [유동진] 자주 방문한 지역
-	Map<String, Object> favoriteAddress(int year, int memberNo);
+	// [유동진] 지역별 방문 횟수 차트
+	Map<String, Object> myFavoriteAddress(int year, int memberNo, String sido);
 	
 	//	[김영후] 회원 가입
 	int insertMember(Member member);

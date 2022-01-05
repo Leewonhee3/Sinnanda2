@@ -168,5 +168,18 @@ public class ChartRestController {
       	   return map;  
          }
          
+         // [유동진] 지역별 방문 횟수 
+         @GetMapping("/member/getMyFavoriteAddress")
+         public Map<String,Object> myFavoriteAddress(HttpSession session, 
+        		 									@RequestParam(name ="year") int year,
+        		 									@RequestParam(defaultValue = "전체") String sido) {
+      	   
+      	   User loginUser = (User)session.getAttribute("loginUser");
+      	   dl.p("ChartRestController", "favoriteAddress()", "loginUser : " + loginUser);
+      	   
+      	   Map<String,Object> map = memberService.getMyFavoriteAddress(year, loginUser.getMember().getMemberNo(), sido);
+      
+      	   return map;  
+         }
          
 }
