@@ -16,6 +16,7 @@
 		<result column="accom_description" property="accomDescription"/>
 		<result column="create_date" property="createDate"/>
 		<result column="update_date" property="updateDate"/>
+		<result column="accom_addr" property="accomAddr"/>
 	</resultMap>
 
 	<!-- [이원희] 숙소 목록 조회 -->
@@ -77,7 +78,14 @@
 			   a.accom_img,
 			   a.accom_description, 
 			   a.create_date, 
-			   a.update_date 
+			   a.update_date,
+			    GROUP_CONCAT(DISTINCT ad.sido," ", 
+								ad.sigungu," ",
+								ad.road_name," ",
+								ad.main_building_code," ",
+			   				ad.sub_building_code,' ',
+			   				ad.building_name," ",
+			   				acd.address_detail) AS accom_addr
 			   FROM accom a 
 				LEFT JOIN accom_category ON a.accom_category_no = accom_category.accom_category_no 
 				LEFT JOIN room r ON r.accom_no = a.accom_no 

@@ -18,6 +18,7 @@ public class Accom {
 	String accomDescriptionLong;
 	String createDate;
 	String updateDate;
+	String accomAddr;
 	
 	List<AccomCategoryInven> accomCategoryInven;	// [이승준] 숙소의 카테고리 목록
 	List<Room> rooms;	// [이승준] 숙소가 가지고 있는 객실의 목록

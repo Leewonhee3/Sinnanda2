@@ -74,10 +74,9 @@
 	                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 	                    <select name="" id="" class="form-control" placeholder="Keyword search">
 	                      <option value="">지역</option>
-	                      <option value="">San Francisco USA</option>
-	                      <option value="">Berlin Germany</option>
-	                      <option value="">Lodon United Kingdom</option>
-	                      <option value="">Paris Italy</option>
+	                      <c:forEach items="${sidoList}" var="sido">
+	                      	<option value="${sido}">${sido}</option>	
+	                      </c:forEach>
 	                    </select>
 	                  </div>
 		              </div>
@@ -265,7 +264,7 @@
 		    							<div class="one">
 		    								<!--[이원희] 숙소 이름 -->
 		    								<div>
-				    							<a href="searchAccomOne?accomNo=${ac.accomNo}">${ac.accomName}</a>
+				    							<a href="searchAccomOne?accomNo=${ac.accomNo}" style ="font-size: small;">${ac.accomName}</a>
 		    								</div>
 				    						<!--[이원희] 별 개수  -->
 				    						<div style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
@@ -288,7 +287,7 @@
 		    						<p>${ac.accomDescription}</p>
 		    						<hr>
 		    						<p class="bottom-area d-flex">
-		    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+		    							<span style ="font-size: xx-small;"><i class="icon-map-o"></i>${ac.accomAddr}</span> 
 		    						</p>
 		    					</div>
 		    				</div>

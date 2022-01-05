@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.b2.sinnanda.commons.DL;
+import com.b2.sinnanda.mapper.AddressMapper;
 import com.b2.sinnanda.mapper.SearchAccomMapper;
 import com.b2.sinnanda.vo.Accom;
 import com.b2.sinnanda.vo.Qna;
@@ -19,8 +20,16 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class SearchAccomService {
 	@Autowired SearchAccomMapper accomMapper;
+	@Autowired AddressMapper addressMapper;
 	@Autowired DL dl;
 	Accom getAccom = new Accom();
+	//[이원희] 검색바 시도 리스트 반환
+	public List<String> getSidoList(){
+		List<String> returnList = addressMapper.selectAddressSido();
+		return returnList;
+	}
+	
+	
 	
 	public Accom getAccomList(Accom accom) {
 		

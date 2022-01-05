@@ -41,5 +41,18 @@
 				sido = #{sido} AND sigungu = #{sigungu} AND road_name = #{roadName}
 			</where>
 		</if>
-	</select>	
+	</select>
+	
+
+	<!-- [이원희] 시도 List Map -->
+	<resultMap type="com.b2.sinnanda.vo.Address" id="AddressListMap">
+		<result column="sido" property="sido"/>
+	</resultMap>
+	
+	<!-- [이원희] "시도"목록 조회-->
+	
+	<select id="selectAddressSido" resultType="String">
+		SELECT sido FROM address GROUP BY sido;
+	</select>
+	
 </mapper>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <!DOCTYPE html>
 <html>
@@ -47,7 +48,7 @@
 					<h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>여행이 신난다.<br></strong> 신나는 도시를 골라봐</h1>
 					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">원하는 도시와 날짜를 골라봐</p>
 					<div class="block-17 my-4">
-						<form action="searchAccomList" method="post" class="d-block d-flex" id="searchForm">
+						<form action="searchAccomList" method="post" class="d-block d-flex" id="searchForm" name="searchForm">
 						<div class="fields d-block d-flex">
 							<div class="select-wrap one-third">
 								<div class="icon">
@@ -55,23 +56,13 @@
 								</div>
 								<select name="" id="" class="form-control" style="width: 170px;">
 									<!-- 지역 선택 -->
-									<option value="">서울</option>
-									<option value="">경기도</option>
-									<option value="">부산광역시</option>
-									<option value="">대구광역시</option>
-									<option value="">인천광역시</option>
-									<option value="">대전광역시</option>
-									<option value="">광주광역시</option>
-									<option value="">울산광역시</option>
-									<option value="">세종특별자치시</option>
-									<option value="">강원도</option>
-									<option value="">충청북도</option>
-									<option value="">충청남도</option>
-									<option value="">전라북도</option>
-									<option value="">전라남도</option>
-									<option value="">경상북도</option>
-									<option value="">경상남도</option>
-									<option value="">제주도</option>
+									
+									<c:forEach items="${sidoList}" var="sido">
+									
+										<option value="${sido}">${sido}</option>
+									
+									</c:forEach>
+									
 								</select>
 							</div>
 						
@@ -79,7 +70,7 @@
 							<div class="icon"><span class="ion-ios-arrow-down">
 								</span>
 							</div>
-							<select name="accomCategoryName" id="accomCategoryName" class="form-control" style="width: 170px;">
+							<select name="accomCategory1" id="accomCategory1" class="form-control" style="width: 170px;">
 							<!-- [이원희] 숙소 유형-->
 							<option value="호텔">호텔</option>
 							<option value="모텔">모텔</option>
@@ -115,13 +106,14 @@
 							<button type="submit" class="search-submit btn btn-primary">Search</button>
 						</form>
 					</div>
-					 <!-- 모텔인지 호텔이인지 카테고리 -->
+					 <!-- [이원희]숙소 카테고리로만 검색 -->
 					<p>어느 숙소로 하실 건가요?</p>
 					<p class="browse d-md-flex">
-					<span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-hotel"></i>모델</a></span>
-					<span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-hotel"></i>호텔</a></span> 
-					<span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-meeting-point"></i>리조트</a></span> 
-					<span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-shopping-bag"></i></a></span>
+					<span class="d-flex justify-content-md-center align-items-md-center"><a href="javascript:void(0);" onclick="clickCategory1Btn('호텔');"><img src="images/indexicon/hotel.png" style="width:20px;height:20px;">&nbsp;호텔</a></span>
+					<span class="d-flex justify-content-md-center align-items-md-center"><a href="javascript:void(0);" onclick="clickCategory2Btn('모텔');"><img src="images/indexicon/motel.png" style="width:20px;height:20px;">&nbsp;모텔</a></span> 
+					<span class="d-flex justify-content-md-center align-items-md-center"><a href="javascript:void(0);" onclick="clickCategory3Btn('펜션');"><img src="images/indexicon/pension.PNG" style="width:20px;height:20px;">&nbsp;펜션</a></span> 
+					<span class="d-flex justify-content-md-center align-items-md-center"><a href="javascript:void(0);" onclick="clickCategory4Btn('풀빌라');"><img src="images/indexicon/poolvilla.PNG" style="width:20px;height:20px;">&nbsp;풀빌라</a></span>
+					<span class="d-flex justify-content-md-center align-items-md-center"><a href="javascript:void(0);" onclick="clickCategory5Btn('게스트하우스');"><img src="images/indexicon/guesthouse.PNG" style="width:20px;height:20px;">&nbsp;게스트하우스</a></span>
 					</p>
 				</div>
 			</div>
@@ -989,6 +981,52 @@
 	<script src="js/scrollax.min.js"></script>
 	<script src="direngine-master/js/google-map.js"></script>
 	<script src="direngine-master/js/main.js"></script>
-    
+	
 </body>
+
+	<script>
+			function clickCategory1Btn(obj) {
+				//[이원희]숙소 카테고리로 검색 post로 매핑
+				
+		    	let formdata = document.forms['searchForm']['accomCategory1'];
+		    	formdata.value = obj;
+		    	document.getElementById('searchForm').submit();
+		        return;	
+			}
+			function clickCategory2Btn(obj) {
+				//[이원희]숙소 카테고리로 검색 post로 매핑
+				let formdata = document.forms['searchForm']['accomCategory1'];
+		    	formdata.value = obj;
+		    	document.getElementById('searchForm').submit();
+		        return;	
+				
+			}
+			function clickCategory3Btn(obj) {
+				//[이원희]숙소 카테고리로 검색 post로 매핑
+				let formdata = document.forms['searchForm']['accomCategory1'];
+		    	formdata.value = obj;
+		    	document.getElementById('searchForm').submit();
+		        return;	
+				
+				
+			}
+			function clickCategory4Btn(obj) {
+				//[이원희]숙소 카테고리로 검색 post로 매핑
+				let formdata = document.forms['searchForm']['accomCategory1'];
+		    	formdata.value = obj;
+		    	document.getElementById('searchForm').submit();
+		        return;	
+				
+			}
+			function clickCategory5Btn(obj) {
+				//[이원희]숙소 카테고리로 검색 post로 매핑
+				let formdata = document.forms['searchForm']['accomCategory1'];
+		    	formdata.value = obj;
+		    	document.getElementById('searchForm').submit();
+		        return;	
+				
+			}
+			
+	</script>
+
 </html>

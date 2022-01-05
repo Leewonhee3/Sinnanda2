@@ -79,6 +79,9 @@ public class SearchAccomController {
 			beginRow = ((currentPage/10)*10)+1;
 		}
 		
+		List<String> sidoList = searchAccomService.getSidoList();
+		
+		
 		dl.p("AccomController","beginRow",beginRow);
 		
 		model.addAttribute("accomName",accom.getAccomName());
@@ -90,6 +93,7 @@ public class SearchAccomController {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("beginRow",beginRow);
 		model.addAttribute("accomRate",accomRate);
+		model.addAttribute("sidoList",sidoList);
 		
 		return"/searchAccomList";
 	}
