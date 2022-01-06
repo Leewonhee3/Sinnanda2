@@ -5,7 +5,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
 	<ul class="nav">
 		<li class="nav-item">
-			<a class="nav-link" href="admin/adminOne?adminNo=${loginUser.admin.adminNo}">
+			<a class="nav-link" href="adminOne?adminNo=${loginUser.admin.adminNo}">
 				<i class="icon-grid menu-icon"></i>
 				<span class="menu-title">관리자 정보</span>
 			</a>
@@ -19,8 +19,8 @@
 			</a>
 			<div class="collapse" id="admin-accom">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" href="admin/memberQnaList">회원 Q&A</a></li>
-					<li class="nav-item"> <a class="nav-link" href="admin/hostQnaList">사업자 Q&A</a></li>
+					<li class="nav-item"> <a class="nav-link" href="memberQnaList">회원 Q&A</a></li>
+					<li class="nav-item"> <a class="nav-link" href="hostQnaList">사업자 Q&A</a></li>
 					
 				</ul>
 			</div>
@@ -38,9 +38,9 @@
                 
                  <!-- 관리자가 회원이나 호스트 리스트 관리(세부적으로 관리는 나중에) -->
                  <li class="nav-item">
-                 <a class="nav-link" href="admin/memberList?adminNo=${loginUser.admin.adminNo}">회원 리스트 </a>
+                 <a class="nav-link" href="memberList?adminNo=${loginUser.admin.adminNo}">회원 리스트 </a>
                  <li class="nav-item">
-                 <a class="nav-link" href="admin/hostList?adminNo=${loginUser.admin.adminNo}">사업자 리스트</a>
+                 <a class="nav-link" href="hostList?adminNo=${loginUser.admin.adminNo}">사업자 리스트</a>
                  
                  <!-- 관리자 레벨이 5이어야 다른 관리자 수정 가능  -->
                  <c:if test="${loginUser.admin.adminPositionNo == 1}">
@@ -78,11 +78,11 @@
 			</a>
 			<div class="collapse" id=admin-calculate>
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" href="admin/incomeChart">정산</a></li>
-					<li class="nav-item"> <a class="nav-link" href="admin/totalMemberYear">회원 관련 통계</a></li>
-					<li class="nav-item"> <a class="nav-link" href="admin/totalMemberOutYear">탈퇴 이유 관련 통계</a></li>
-					<li class="nav-item"> <a class="nav-link" href="admin/totalHostYear">사업자 관련 통계</a></li>
-					<li class="nav-item"> <a class="nav-link" href="admin/totalAccomYear">숙소 관련 통계</a></li>
+					<li class="nav-item"> <a class="nav-link" href="incomeChart">정산</a></li>
+					<li class="nav-item"> <a class="nav-link" href="totalMemberYear">회원 관련 통계</a></li>
+					<li class="nav-item"> <a class="nav-link" href="totalMemberOutYear">탈퇴 이유 관련 통계</a></li>
+					<li class="nav-item"> <a class="nav-link" href="totalHostYear">사업자 관련 통계</a></li>
+					<li class="nav-item"> <a class="nav-link" href="totalAccomYear">숙소 관련 통계</a></li>
 				</ul>
 			</div>
 		</li>

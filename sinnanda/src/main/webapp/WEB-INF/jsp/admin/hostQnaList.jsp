@@ -10,22 +10,20 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-	<!-- plugins:css -->
-	<link rel="stylesheet" href="/skydash/vendors/feather/feather.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" href="/skydash/vendors/css/vendor.bundle.base.css">
-	
+	<!-- plugins:css -->	
+	<link rel="stylesheet" href="../skydash/vendors/feather/feather.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" href="../skydash/vendors/css/vendor.bundle.base.css">
 	<!-- endinject -->
 	<!-- Plugin css for this page -->
-	<link rel="stylesheet" href="/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" type="text/css" href="/skydash/js/select.dataTables.min.css">
-	
+	<link rel="stylesheet" href="../skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="../skydash/js/select.dataTables.min.css">
 	<!-- End plugin css for this page -->
-	
 	<!-- inject:css -->
-	<link rel="stylesheet" href="/skydash/css/vertical-layout-light/style.css">
-	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
+	<link rel="stylesheet" href="../skydash/css/vertical-layout-light/style.css">
+	<!-- endinject -->
+	<link rel="shortcut icon" href="../skydash/images/favicon.png" />
 	
 	<title>사업자 QnA 페이지</title>
 </head>
@@ -58,16 +56,16 @@
 										<div class="container2">
 											<select id="hostQnaCategory" name="hostQnaCategory" class="form-control-sm" onchange="location.href=this.value" style="float: right; margin-bottom: 20px;">
 												<option value="">선택</option>
-												<option value="/admin/hostQnaList">전체 문의</option>
-												<option value="/admin/hostQnaList?hostQnaCategory=기타 문의">기타 문의</option>
-												<option value="/admin/hostQnaList?hostQnaCategory=이용 문의">이용 문의</option>
-												<option value="/admin/hostQnaList?hostQnaCategory=시스템 문의">시스템 문의</option>
-												<option value="/admin/hostQnaList?hostQnaCategory=숙소 추가">숙소 추가</option>
-												<option value="/admin/hostQnaList?hostQnaCategory=숙소 수정">숙소 수정</option>
-												<option value="/admin/hostQnaList?hostQnaCategory=숙소 삭제">숙소 삭제</option>
-												<option value="/admin/hostQnaList?hostQnaCategory=객실 추가">객실 추가</option>
-												<option value="/admin/hostQnaList?hostQnaCategory=객실 수정">객실 수정</option>
-												<option value="/admin/hostQnaList?hostQnaCategory=객실 삭제">객실 삭제</option>
+												<option value="hostQnaList">전체 문의</option>
+												<option value="hostQnaList?hostQnaCategory=기타 문의">기타 문의</option>
+												<option value="hostQnaList?hostQnaCategory=이용 문의">이용 문의</option>
+												<option value="hostQnaList?hostQnaCategory=시스템 문의">시스템 문의</option>
+												<option value="hostQnaList?hostQnaCategory=숙소 추가">숙소 추가</option>
+												<option value="hostQnaList?hostQnaCategory=숙소 수정">숙소 수정</option>
+												<option value="hostQnaList?hostQnaCategory=숙소 삭제">숙소 삭제</option>
+												<option value="hostQnaList?hostQnaCategory=객실 추가">객실 추가</option>
+												<option value="hostQnaList?hostQnaCategory=객실 수정">객실 수정</option>
+												<option value="hostQnaList?hostQnaCategory=객실 삭제">객실 삭제</option>
 											</select>
 										</div>
 										<table class="table table-myPage" style="width: 100%;">
@@ -85,7 +83,7 @@
 														<c:if test="${hostQna.hostQnaComments.adminNo != null}">
 															<span style="color: #2828CD; font-weight: bold;">[답변 완료]</span>
 														</c:if>
-														<a href="/admin/hostQnaOne?hostQnaNo=${hostQna.hostQnaNo}">${hostQna.hostQnaTitle}</a>
+														<a href="hostQnaOne?hostQnaNo=${hostQna.hostQnaNo}">${hostQna.hostQnaTitle}</a>
 													</td>
 													<td style="text-align:center">${hostQna.hostQnaCategory}</td>
 													<td style="text-align:center">${hostQna.hostName}</td>
@@ -97,7 +95,7 @@
 											</c:forEach>
 										</table>
 										<c:if test="${loginUser.userLevel == 2}">
-											<a href="/host/addHostQna" class="btn btn-primary" style="float: right; margin-top: 20px;">문의사항 작성</a>
+											<a href="../addHostQna" class="btn btn-primary" style="float: right; margin-top: 20px;">문의사항 작성</a>
 										</c:if>
 										<!-- Paging -->			
 										<div class="row mt-5">
@@ -120,7 +118,7 @@
 																		<li class="active"><span>${i}</span></li>
 																	</c:when>
 												    				<c:otherwise>
-																		<li><a href="/admin/hostQnaList?currentPage=${i}&hostQnaCategory=${hostQnaCategory}">${i}</a></li>	
+																		<li><a href="hostQnaList?currentPage=${i}&hostQnaCategory=${hostQnaCategory}">${i}</a></li>	
 																	</c:otherwise>		
 																</c:choose>
 																<!-- LastPage이면 다음 페이지 번호를 출력하지 않는다 -->
@@ -153,28 +151,26 @@
 	<%@ include file="/WEB-INF/partials/myPageFooter.jsp" %>
 	<!-- [이승준] 하단 Footer - END -->
 
+<!-- plugins:js -->
+  <script src="../vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../vendors/chart.js/Chart.min.js"></script>
+  <script src="../vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="../vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="../js/dataTables.select.min.js"></script>
 
-	<!-- plugins:js -->
-	<script src="/vendors/js/vendor.bundle.base.js"></script>
-	
-	<!-- endinject -->
-	<!-- Plugin js for this page -->
-	<script src="/vendors/chart.js/Chart.min.js"></script>
-	<script src="/vendors/datatables.net/jquery.dataTables.js"></script>
-	<script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-	<script src="/js/dataTables.select.min.js"></script>
-	
-	<!-- End plugin js for this page -->
-	<!-- inject:js -->
-	<script src="/js/off-canvas.js"></script>
-	<script src="/js/hoverable-collapse.js"></script>
-	<script src="/js/template.js"></script>
-	<script src="/js/settings.js"></script>
-	<script src="/js/todolist.js"></script>
-	
-	<!-- endinject -->
-	<!-- Custom js for this page-->
-	<script src="/js/dashboard.js"></script>
-	<script src="/js/Chart.roundedBarCharts.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../js/dashboard.js"></script>
+  <script src="../js/Chart.roundedBarCharts.js"></script>
+  <!-- End custom js for this page-->
 </body>
 </html>

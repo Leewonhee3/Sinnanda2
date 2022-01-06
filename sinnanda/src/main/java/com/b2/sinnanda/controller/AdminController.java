@@ -20,14 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.b2.sinnanda.commons.DL;
 import com.b2.sinnanda.mapper.AdminMapper;
 import com.b2.sinnanda.mapper.QnaMapper;
+import com.b2.sinnanda.service.AccomService;
 import com.b2.sinnanda.service.AdminService;
 import com.b2.sinnanda.service.HostQnaService;
 import com.b2.sinnanda.service.MemberService;
 import com.b2.sinnanda.service.NoticeService;
 import com.b2.sinnanda.service.QnaService;
+import com.b2.sinnanda.service.RoomService;
 import com.b2.sinnanda.vo.Admin;
 import com.b2.sinnanda.vo.AdminSales;
 import com.b2.sinnanda.vo.Member;
+import com.b2.sinnanda.vo.Room;
 import com.b2.sinnanda.vo.User;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +45,8 @@ public class AdminController {
    @Autowired QnaService qnaService; 
    @Autowired NoticeService noticeService;
    @Autowired MemberService memberService;
+   @Autowired AccomService accomService;
+   @Autowired RoomService roomService;
    
    @Autowired DL dl;
    
@@ -324,6 +329,97 @@ public class AdminController {
          model.addAttribute("pageNo", pageNo);
          return "/admin/hostList";
       }
+      
+      //[윤경환] 관리자가 볼수 있는 사업자 숙소
+      @GetMapping("/admin/adminAccomHostList")
+      public String getAdminAccomHostList( Model model, 
+  			@RequestParam(defaultValue = "1") int currentPage, int hostNo,
+  			HttpSession session) {
+
+  		// 1. 로그인 세션 조회
+  		User loginUser = (User)session.getAttribute("loginUser");
+  		dl.p("getAccomListByHost()", "loginUser", loginUser);
+  		
+    	  
+    	// 2. 페이지번호의 출력을 시작하는 수를 구하기 수식
+  		int beginRow = (currentPage * ROW_PER_PAGE) - ROW_PER_PAGE;
+    	  
+    		// 3. "사업자 소유의 숙소 목록" 조회 서비스 호출
+    	  Map<String, Object> map = accomService.getAccomListByHost(hostNo, beginRow, ROW_PER_PAGE);
+    	  
+    		// 4. 10개의 페이지번호의를 출력하기 위한 변수
+  		int pageNo = ((beginRow / 100) * 10 + 1);
+  		
+  		// 5. 모델 전달
+		model.addAttribute("accomList", map.get("accomList"));
+		model.addAttribute("accomListTotalCount", map.get("totalCount"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("loginUser", loginUser);
+		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("beginRow", beginRow);
+		model.addAttribute("pageNo", pageNo);
+		
+    	  
+    	  return "admin/adminAccomHostList";
+    	  
+      }
+      
+      //[윤경환]관리자가 볼수 있는 숙소에 대한 자세한 정보 
+      @GetMapping("/admin/adminAccomHostOne")
+      public String getAdminAccomHostOne(HttpSession session, Model model, int accomNo, 
+  			@RequestParam(defaultValue = "1") int currentPage, int hostNo) {
+  		dl.p("AccomController", "getAccomOne() | Get", "[시작]");
+  		dl.p("getAccomOne()", "accomNo", accomNo);
+  		
+  		// 1. 로그인 세션 조회
+  		User loginUser = (User)session.getAttribute("loginUser");
+  		dl.p("getAccomOne()", "loginUser", loginUser);
+  		
+  		// 2. 페이지번호의 출력을 시작하는 수를 구하기 수식
+  		int beginRow = (currentPage * ROW_PER_PAGE) - ROW_PER_PAGE;
+  		
+  		// 3. "사업자 상세" 조회 서비스 호출
+  		Map<String, Object> map = accomService.getAccomOne(accomNo, beginRow, ROW_PER_PAGE);
+  		
+  		// 4. 10개의 페이지번호의를 출력하기 위한 변수
+  		int pageNo = ((beginRow / 100) * 10 + 1);
+  		
+  		// 4. 모델 전달
+  		model.addAttribute("accom", map.get("accom"));
+  		model.addAttribute("roomListTotalCount", map.get("totalCount"));
+  		model.addAttribute("lastPage", map.get("lastPage"));
+  		model.addAttribute("loginUser", loginUser);
+  		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+  		model.addAttribute("currentPage", currentPage);
+  		model.addAttribute("beginRow", beginRow);
+  		model.addAttribute("pageNo", pageNo);
+  		model.addAttribute("hostNo", hostNo);
+  		
+  		
+    	  return "admin/adminAccomHostOne";
+      }
+      
+      //[윤경환] 사업자 객실에  대한 정보 
+      @GetMapping("/admin/adminRoomHostOne")
+      public String getAdminRoomHostOne(Model model, int roomNo, int hostNo) {
+  		dl.p("RoomController", "getRoomOne() | Get", "[시작]");
+  		dl.p("getRoomOne()", "roomNo", roomNo);
+  		dl.p("getRoomOne()", "hostNo", hostNo);
+  		
+  		Room room = roomService.getRoomOne(roomNo);
+  		
+  		
+  		// 4. 모델 전달
+  		model.addAttribute("room", room);
+  		model.addAttribute("hostNo", hostNo);
+    	
+    	  return "admin/adminRoomHostOne";
+      }
+      
+      
+      
+      
       //[윤경환] 회원 정보 상세내뇽 
       @GetMapping("/admin/memberAdminOne")
       public String getMemberAdminOne(int memberNo, Model model) {

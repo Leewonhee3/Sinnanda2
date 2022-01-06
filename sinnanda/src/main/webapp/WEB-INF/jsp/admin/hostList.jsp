@@ -10,22 +10,20 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-	<!-- plugins:css -->
-	<link rel="stylesheet" href="/skydash/vendors/feather/feather.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" href="/skydash/vendors/css/vendor.bundle.base.css">
-	
+	<!-- plugins:css -->	
+	<link rel="stylesheet" href="../skydash/vendors/feather/feather.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" href="../skydash/vendors/css/vendor.bundle.base.css">
 	<!-- endinject -->
 	<!-- Plugin css for this page -->
-	<link rel="stylesheet" href="/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" type="text/css" href="/skydash/js/select.dataTables.min.css">
-	
+	<link rel="stylesheet" href="../skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="../skydash/js/select.dataTables.min.css">
 	<!-- End plugin css for this page -->
-	
 	<!-- inject:css -->
-	<link rel="stylesheet" href="/skydash/css/vertical-layout-light/style.css">
-	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
+	<link rel="stylesheet" href="../skydash/css/vertical-layout-light/style.css">
+	<!-- endinject -->
+	<link rel="shortcut icon" href="../skydash/images/favicon.png" />
 	
 	<title>회원 List 페이지</title>
 </head>
@@ -87,7 +85,7 @@
 													<c:when test="${host.hostActive == 0}"> 
 													
 														<td style="text-align:center">
-															 <a href="/admin/modifyHostAc?hostNo=${host.hostNo}" class="btn btn-block btn-primary">활성화</a>
+															 <a href="modifyHostAc?hostNo=${host.hostNo}" class="btn btn-block btn-primary">활성화</a>
 														</td>
 													
 													</c:when>
@@ -99,7 +97,7 @@
 												</c:choose>
 													<!-- 호스트가 가지고 있는 숙소 정보  -->
 														<td style="text-align:center">
-															 <a href="#"  class="btn btn-block btn-primary">숙소 정보</a>
+															 <a href="adminAccomHostList?hostNo=${host.hostNo}" class="btn btn-block btn-primary">숙소 정보</a>
 														</td>
 												
 												
@@ -132,7 +130,7 @@
 																		<li class="active"><span>${i}</span></li>
 																	</c:when>
 												    				<c:otherwise>
-																		<li><a href="/admin/hostList?currentPage=${i}&hostActive=${hostActive}">${i}</a></li>	
+																		<li><a href="hostList?currentPage=${i}&hostActive=${hostActive}">${i}</a></li>	
 																	</c:otherwise>		
 																</c:choose>
 																<!-- LastPage이면 다음 페이지 번호를 출력하지 않는다 -->
@@ -166,27 +164,26 @@
 	<!-- [이승준] 하단 Footer - END -->
 
 
-	<!-- plugins:js -->
-	<script src="/vendors/js/vendor.bundle.base.js"></script>
-	
-	<!-- endinject -->
-	<!-- Plugin js for this page -->
-	<script src="/vendors/chart.js/Chart.min.js"></script>
-	<script src="/vendors/datatables.net/jquery.dataTables.js"></script>
-	<script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-	<script src="/js/dataTables.select.min.js"></script>
-	
-	<!-- End plugin js for this page -->
-	<!-- inject:js -->
-	<script src="/js/off-canvas.js"></script>
-	<script src="/js/hoverable-collapse.js"></script>
-	<script src="/js/template.js"></script>
-	<script src="/js/settings.js"></script>
-	<script src="/js/todolist.js"></script>
-	
-	<!-- endinject -->
-	<!-- Custom js for this page-->
-	<script src="/js/dashboard.js"></script>
-	<script src="/js/Chart.roundedBarCharts.js"></script>
+  <!-- plugins:js -->
+  <script src="../vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../vendors/chart.js/Chart.min.js"></script>
+  <script src="../vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="../vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="../js/dataTables.select.min.js"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../js/dashboard.js"></script>
+  <script src="../js/Chart.roundedBarCharts.js"></script>
+  <!-- End custom js for this page-->
 </body>
 </html>

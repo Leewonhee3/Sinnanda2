@@ -25,7 +25,8 @@
 	<!-- endinject -->
 	<link rel="shortcut icon" href="../skydash/images/favicon.png" />
 	
-	<title>회원 QnA 페이지</title>
+	
+	<title>사업자 숙소 페이지</title>
 </head>
 
 <body>
@@ -49,55 +50,57 @@
 						<div class="col-md-12 grid-margin stretch-card">
 							<div class="card position-relative">
 								<div class="card-body">
-									<span class="subheading" style="margin-left: 10px;">회원 Q&A</span>
-									<h1 style="margin-top: 10px;"><strong>회원 문의</strong></h1>
+									<span class="subheading" style="margin-left: 10px;">
+										<a href="adminPage?hostNo=${loginUser.admin.adminNo}">메인</a> > 
+										숙소 목록
+									</span>
+									
+									<h1 style="margin-top: 10px;"><strong>사업자 숙소 목록</strong></h1>
 									
 								    <div class="container">
-										<div class="container2">
-											<select id="hostQnaCategory" name="hostQnaCategory" class="form-control-sm" onchange="location.href=this.value" style="float: right; margin-bottom: 20px;">
-												<option value="">선택</option>
-												<option value="memberQnaList">전체문의</option>
-												<option value="memberQnaList?qnaCategory=기타문의">기타문의</option>
-												<option value="memberQnaList?qnaCategory=결제문의">결제문의</option>
-												<option value="memberQnaList?qnaCategory=이용문의">이용문의</option>
-												<option value="memberQnaList?qnaCategory=예약문의">예약문의</option>
-												<option value="memberQnaList?qnaCategory=숙소문의">숙소문의</option>
-											</select>
+								    	<div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+											<span style="line-heigth: 100px;">총 개수 : <strong style="color: red;">${accomListTotalCount}</strong></span>
 										</div>
+										
 										<table class="table table-myPage" style="width: 100%;">
 											<tr style="text-align:center">
-												<th width="5%">번호</th>
-												<th width="40%">제목</th>
-												<th width="10%">문의유형</th>
-												<th width="10%">비밀유무</th>
-												<th width="10%">작성자</th>
-												<th width="10%">작성일</th>
+												<th width="12%">이미지</th>
+												<th width="15%">번호</th>
+												<th>분류</th>
+												<th>숙소명</th>
+												<th>방 개수</th>
+												<th>등급</th>
+												<th>등록일</th>
 											</tr>
-											<c:forEach items="${adminQnaList}" var="qna">
+											<c:forEach items="${accomList}" var="accom">
 												<tr>
-													<td style="text-align:center">${qna.qnaNo}</td>
-													<td>
-														<a href="memberQnaOne?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a>
+													<td style="text-align:center;">
+														<img src="${pageContext.request.contextPath}/images/accom/${accom.accomImg}" style="width: 70px; height: 70px; border-radius:10px;">
 													</td>
-													<td style="text-align:center">${qna.qnaCategory}</td>
-													<td style="text-align:center">${qna.qnaSecret}</td>
-													<td style="text-align:center">${qna.memberName}</td>
+													<td style="text-align:center">${accom.accomNo}</td>
+													<td style="text-align:center">${accom.accomCategoryName}</td>
 													<td style="text-align:center">
-														<fmt:parseDate value="${qna.createDate}" var="createDate" pattern="yyyy-MM-dd HH:mm:ss.S" />
-														<fmt:formatDate value="${createDate}" pattern="yy/MM/dd HH:mm"/>
+														<a href="adminAccomHostOne?accomNo=${accom.accomNo}&hostNo=${accom.hostNo}">${accom.accomName}</a>
+													</td>
+													<td style="text-align:center">${accom.roomCount}</td>
+													<td style="text-align:center">${accom.commissionName}</td>
+													<td style="text-align:center">
+														<fmt:parseDate value="${accom.createDate}" var="createDate" pattern="yyyy-MM-dd HH:mm:ss.S" />
+														<fmt:formatDate value="${createDate}" pattern="yy/MM/dd"/>
 													</td>
 												</tr>
 											</c:forEach>
 										</table>
-							
+										
+										
 										<!-- Paging -->			
 										<div class="row mt-5">
 									    	<div class="col text-center">
 									            <div class="block-27">
 													<ul>
 														<!-- '이전' 버튼 -->
-														<c:if test="${beginRow >= (ROW_PER_PAGE * 10)}">
-															<li><a href="memberQnaList?currentPage=${pageNo-1}&qnaCategory=${qnaCategory}">&lt;</a></li>
+														<c:if test="${beginRow >= ROW_PER_PAGE}">
+															<li><a href="adminAccomHostList?currentPage=${currentPage-1}">&lt;</a></li>
 														</c:if>
 														
 														<!-- Page 번호 -->
@@ -111,7 +114,7 @@
 																		<li class="active"><span>${i}</span></li>
 																	</c:when>
 												    				<c:otherwise>
-																		<li><a href="memberQnaList?currentPage=${i}&qnaCategory=${qnaCategory}">${i}</a></li>	
+																		<li><a href="adminAccomHostList?currentPage=${i}">${i}</a></li>	
 																	</c:otherwise>		
 																</c:choose>
 																<!-- LastPage이면 다음 페이지 번호를 출력하지 않는다 -->
@@ -121,9 +124,9 @@
 															</c:if>
 														</c:forEach>
 														
-															<!-- '다음' 버튼 -->
-														<c:if test="${lastPage >= pageNo + 10}">
-															<li><a href="memberQnaList?currentPage=${pageNo+10}&qnaCategory=${qnaCategory}">&gt;</a></li>
+														<!-- '다음' 버튼 -->
+														<c:if test="${currentPage != lastPage}">
+															<li><a href="adminAccomHostList?currentPage=${currentPage+1}">&gt;</a></li>
 														</c:if>
 													</ul>
 												</div>
@@ -141,10 +144,13 @@
 	</div>
 	
 	<!-- [이승준] 하단 Footer - SATRT -->
-	<%@ include file="/WEB-INF/partials/myPageFooter.jsp" %>
+	<%@ include file="/WEB-INF/partials/footer.jsp" %>
 	<!-- [이승준] 하단 Footer - END -->
 
- <!-- plugins:js -->
+
+
+
+  <!-- plugins:js -->
   <script src="../vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->

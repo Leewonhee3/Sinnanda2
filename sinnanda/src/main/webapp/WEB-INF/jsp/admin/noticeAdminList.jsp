@@ -10,22 +10,21 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-	<!-- plugins:css -->
-	<link rel="stylesheet" href="/skydash/vendors/feather/feather.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" href="/skydash/vendors/css/vendor.bundle.base.css">
-	
+	<!-- plugins:css -->	
+	<link rel="stylesheet" href="../skydash/vendors/feather/feather.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" href="../skydash/vendors/css/vendor.bundle.base.css">
 	<!-- endinject -->
 	<!-- Plugin css for this page -->
-	<link rel="stylesheet" href="/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" type="text/css" href="/skydash/js/select.dataTables.min.css">
-	
+	<link rel="stylesheet" href="../skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="../skydash/js/select.dataTables.min.css">
 	<!-- End plugin css for this page -->
-	
 	<!-- inject:css -->
-	<link rel="stylesheet" href="/skydash/css/vertical-layout-light/style.css">
-	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
+	<link rel="stylesheet" href="../skydash/css/vertical-layout-light/style.css">
+	<!-- endinject -->
+	<link rel="shortcut icon" href="../skydash/images/favicon.png" />
+	
 	
 	<title>공지사항 페이지</title>
 </head>
@@ -58,12 +57,12 @@
 										<div class="container2">
 											<select id="hostQnaCategory" name="hostQnaCategory" class="form-control-sm" onchange="location.href=this.value" style="float: right; margin-bottom: 20px;">
 												<option value="">선택</option>
-												<option value="/admin/noticeAdminList?noticeCategory=전체">전체문의</option>
-												<option value="/admin/noticeAdminList?noticeCategory=기타">기타</option>
-												<option value="/admin/noticeAdminList?noticeCategory=정보">정보</option>
-												<option value="/admin/noticeAdminList?noticeCategory=시스템">시스템</option>
-												<option value="/admin/noticeAdminList?noticeCategory=이벤트">이벤트</option>
-												<option value="/admin/noticeAdminList?noticeCategory=뉴스">뉴스</option>
+												<option value="noticeAdminList?noticeCategory=전체">전체문의</option>
+												<option value="noticeAdminList?noticeCategory=기타">기타</option>
+												<option value="noticeAdminList?noticeCategory=정보">정보</option>
+												<option value="noticeAdminList?noticeCategory=시스템">시스템</option>
+												<option value="noticeAdminList?noticeCategory=이벤트">이벤트</option>
+												<option value="noticeAdminList?noticeCategory=뉴스">뉴스</option>
 											</select>
 										</div>
 										<table class="table table-myPage" style="width: 100%;">
@@ -78,7 +77,7 @@
 											<tr style="background-color:LightGray;">
 												<td style="text-align:center">${p.noticeNo}</td>
 												<td>
-													<a href="/admin/noticeAdminOne?noticeNo=${p.noticeNo}">${p.noticeTitle}</a>
+													<a href="noticeAdminOne?noticeNo=${p.noticeNo}">${p.noticeTitle}</a>
 												</td>
 												<td style="text-align:center">${p.noticeCategory}</td>
 												<td style="text-align:center">${p.adminName}</td>
@@ -92,7 +91,7 @@
 											<tr>
 												<td style="text-align:center">${n.noticeNo}</td>
 												<td>
-													<a href="/admin/noticeAdminOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a>
+													<a href="noticeAdminOne?noticeNo=${n.noticeNo}">${n.noticeTitle}</a>
 												</td>
 												<td style="text-align:center">${n.noticeCategory}</td>
 												<td style="text-align:center">${n.adminName}</td>
@@ -106,7 +105,7 @@
 										<!-- 관리자인 경우 공지사항 작성 링크 -->
 													<c:if test="${loginUser.userLevel == 3}">
 														<div>
-															<a class="btn btn-primary" href="/admin/addNotice" style="float: right; margin-top: auto;">공지사항 작성</a>
+															<a class="btn btn-primary" href="addNotice" style="float: right; margin-top: auto;">공지사항 작성</a>
 														</div>
 													</c:if>
 										<!-- Paging -->			
@@ -130,7 +129,7 @@
 																	<li class="active"><span>${i}</span></li>
 																</c:when>
 											    				<c:otherwise>
-																	<li><a href="/admin/noticeAdminList?currentPage=${i}&noticeCategory=${noticeCategory}">${i}</a></li>	
+																	<li><a href="noticeAdminList?currentPage=${i}&noticeCategory=${noticeCategory}">${i}</a></li>	
 																</c:otherwise>		
 															</c:choose>
 															<!-- LastPage이면 다음 페이지 번호를 출력하지 않는다 -->
@@ -164,27 +163,26 @@
 	<!-- [이승준] 하단 Footer - END -->
 
 
-	<!-- plugins:js -->
-	<script src="/vendors/js/vendor.bundle.base.js"></script>
-	
-	<!-- endinject -->
-	<!-- Plugin js for this page -->
-	<script src="/vendors/chart.js/Chart.min.js"></script>
-	<script src="/vendors/datatables.net/jquery.dataTables.js"></script>
-	<script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-	<script src="/js/dataTables.select.min.js"></script>
-	
-	<!-- End plugin js for this page -->
-	<!-- inject:js -->
-	<script src="/js/off-canvas.js"></script>
-	<script src="/js/hoverable-collapse.js"></script>
-	<script src="/js/template.js"></script>
-	<script src="/js/settings.js"></script>
-	<script src="/js/todolist.js"></script>
-	
-	<!-- endinject -->
-	<!-- Custom js for this page-->
-	<script src="/js/dashboard.js"></script>
-	<script src="/js/Chart.roundedBarCharts.js"></script>
+	 <!-- plugins:js -->
+  <script src="../vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../vendors/chart.js/Chart.min.js"></script>
+  <script src="../vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="../vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="../js/dataTables.select.min.js"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../js/dashboard.js"></script>
+  <script src="../js/Chart.roundedBarCharts.js"></script>
+  <!-- End custom js for this page-->
 </body>
 </html>

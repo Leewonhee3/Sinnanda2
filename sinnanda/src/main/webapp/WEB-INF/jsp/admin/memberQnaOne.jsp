@@ -9,23 +9,21 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
-	<!-- plugins:css -->
-	<link rel="stylesheet" href="/skydash/vendors/feather/feather.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" href="/skydash/vendors/css/vendor.bundle.base.css">
-	
+	<!-- plugins:css -->	
+	<link rel="stylesheet" href="../skydash/vendors/feather/feather.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" href="../skydash/vendors/css/vendor.bundle.base.css">
 	<!-- endinject -->
 	<!-- Plugin css for this page -->
-	<link rel="stylesheet" href="/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" type="text/css" href="/skydash/js/select.dataTables.min.css">
-	
+	<link rel="stylesheet" href="../skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="../skydash/js/select.dataTables.min.css">
 	<!-- End plugin css for this page -->
-	
 	<!-- inject:css -->
-	<link rel="stylesheet" href="/skydash/css/vertical-layout-light/style.css">
-	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
+	<link rel="stylesheet" href="../skydash/css/vertical-layout-light/style.css">
+	<!-- endinject -->
+	<link rel="shortcut icon" href="../skydash/images/favicon.png" />
+	
 	
 	<title>회원 QnA 페이지</title>
 </head>
@@ -64,8 +62,8 @@
 							<div class="card position-relative">
 								<div class="card-body">
 									<span class="subheading">
-										<a href="/admin/adminPage?adminNo=${loginUser.admin.adminNo}">메인</a> > 
-										<a href="/admin/memberQnaList">회원 문의 목록</a> > 
+										<a href="adminPage?adminNo=${loginUser.admin.adminNo}">메인</a> > 
+										<a href="memberQnaList">회원 문의 목록</a> > 
 										상세보기
 									</span>
 									
@@ -108,7 +106,7 @@
 										
 											<!-- [윤경환] 비회원 or 회원, 답변이 없을 때 -->
 										<c:if test="${qna.qnaComments.qnaCommentContent == null}">
-											<form onsubmit="return formCheck()" action="/admin/addMemberQnaComment" method="post">
+											<form onsubmit="return formCheck()" action="addMemberQnaComment" method="post">
 											
 													<input type ="hidden" id="adminNo" name ="adminNo" value ="${loginUser.admin.adminNo}">
 													<input type ="hidden" id="qnaNo" name ="qnaNo" value ="${qna.qnaNo}">
@@ -155,29 +153,24 @@
 	<!-- [이승준] 하단 Footer - SATRT -->
 	<%@ include file="/WEB-INF/partials/myPageFooter.jsp" %>
 	<!-- [이승준] 하단 Footer - END -->
+<!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../vendors/chart.js/Chart.min.js"></script>
+  <script src="../vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="../vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="../js/dataTables.select.min.js"></script>
 
-
-	<!-- plugins:js -->
-	<script src="/vendors/js/vendor.bundle.base.js"></script>
-	
-	<!-- endinject -->
-	<!-- Plugin js for this page -->
-	<script src="/vendors/chart.js/Chart.min.js"></script>
-	<script src="/vendors/datatables.net/jquery.dataTables.js"></script>
-	<script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-	<script src="/js/dataTables.select.min.js"></script>
-	
-	<!-- End plugin js for this page -->
-	<!-- inject:js -->
-	<script src="/js/off-canvas.js"></script>
-	<script src="/js/hoverable-collapse.js"></script>
-	<script src="/js/template.js"></script>
-	<script src="/js/settings.js"></script>
-	<script src="/js/todolist.js"></script>
-	
-	<!-- endinject -->
-	<!-- Custom js for this page-->
-	<script src="/js/dashboard.js"></script>
-	<script src="/js/Chart.roundedBarCharts.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../js/dashboard.js"></script>
+  <script src="../js/Chart.roundedBarCharts.js"></script>
+  <!-- End custom js for this page-->
 </body>
 </html>
