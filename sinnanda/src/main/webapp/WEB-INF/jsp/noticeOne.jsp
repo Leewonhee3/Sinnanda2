@@ -56,9 +56,9 @@
 			
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item cta"><a href="/qnaList" class="nav-link">Q&A</a></li>
-					<li class="nav-item active"><a href="/noticeList" class="nav-link">공지사항</a></li>
-					<li class="nav-item cta"><a href="/noticeList" class="nav-link">신난다 소개</a></li>
+					<li class="nav-item cta"><a href="qnaList" class="nav-link">Q&A</a></li>
+					<li class="nav-item active"><a href="noticeList" class="nav-link">공지사항</a></li>
+					<li class="nav-item cta"><a href="noticeList" class="nav-link">신난다 소개</a></li>
 					
 				</ul>
 				<ul class="navbar-nav mj-auto">
@@ -79,7 +79,7 @@
 						<c:if test="${loginUser.userLevel == 3}">
 							<li class="nav-item member">
 							<a href="myPage?memberNo=${loginUser.admin.adminNo}" class="nav-link">
-									<img src="/images/jun_test/adminImg.png" width="20px" height="20px">
+									<img src="images/jun_test/adminImg.png" width="20px" height="20px">
 									${loginUser.admin.adminName}&nbsp;관리자
 								</a>
 							</li>

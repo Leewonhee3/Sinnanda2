@@ -13,24 +13,24 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
 	
-	<link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
-	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="css/animate.css">
 	
-	<link rel="stylesheet" href="/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="/css/owl.theme.default.min.css">
-	<link rel="stylesheet" href="/css/magnific-popup.css">
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
 	
-	<link rel="stylesheet" href="/css/aos.css">
+	<link rel="stylesheet" href="css/aos.css">
 	
-	<link rel="stylesheet" href="/css/ionicons.min.css">
+	<link rel="stylesheet" href="css/ionicons.min.css">
 	
-	<link rel="stylesheet" href="/css/bootstrap-datepicker.css">
-	<link rel="stylesheet" href="/css/jquery.timepicker.css">
+	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="css/jquery.timepicker.css">
 	
 	
-	<link rel="stylesheet" href="/css/flaticon.css">
-	<link rel="stylesheet" href="/css/icomoon.css">
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="css/flaticon.css">
+	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="css/style.css">
 	<title>회원 문의사항 목록</title>
 </head>
 <!-- [이승준] 페이지 접근 시, 본문으로 이동해주는 JQuery 실행 -->
@@ -61,12 +61,12 @@
 			<div class="container2">
 				<select id="qnaCategory" name="qnaCategory" class="form-control-sm" onchange="location.href=this.value" style="float: right; margin-bottom: 20px;">
 					<option value="">선택</option>
-					<option value="/qnaList?qnaCategory=전체">전체문의</option>
-					<option value="/qnaList?qnaCategory=기타문의">기타문의</option>
-					<option value="/qnaList?qnaCategory=결제문의">결제문의</option>
-					<option value="/qnaList?qnaCategory=이용문의">이용문의</option>
-					<option value="/qnaList?qnaCategory=예약문의">예약문의</option>
-					<option value="/qnaList?qnaCategory=숙소문의">숙소문의</option>
+					<option value="qnaList?qnaCategory=전체">전체문의</option>
+					<option value="qnaList?qnaCategory=기타문의">기타문의</option>
+					<option value="qnaList?qnaCategory=결제문의">결제문의</option>
+					<option value="qnaList?qnaCategory=이용문의">이용문의</option>
+					<option value="qnaList?qnaCategory=예약문의">예약문의</option>
+					<option value="qnaList?qnaCategory=숙소문의">숙소문의</option>
 				</select>
 			</div>
 			<table class="table table-board" style="width: 100%;">
@@ -84,7 +84,7 @@
 							<c:if test="${qna.qnaComments.adminNo != null}">
 								<span style="color: #CD5C5C; font-weight: bold;">[답변 완료]</span>
 							</c:if>
-							<a href="/qnaOne?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a>
+							<a href="qnaOne?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a>
 							<c:if test="${qna.qnaSecret == '비밀문의'}">
 								<img src="/images/qna/lockImg.png" width="20px" height="20px">
 							</c:if>
@@ -98,7 +98,7 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<a class="btn btn-primary" href="/member/addQna" style="float: right; margin-top: auto;">문의사항 작성</a>
+			<a class="btn btn-primary" href="member/addQna" style="float: right; margin-top: auto;">문의사항 작성</a>
 			
 			
 			<!-- Paging -->			
@@ -122,7 +122,7 @@
 											<li class="active"><span>${i}</span></li>
 										</c:when>
 					    				<c:otherwise>
-											<li><a href="/qnaList?currentPage=${i}&qnaCategory=${qnaCategory}">${i}</a></li>	
+											<li><a href="qnaList?currentPage=${i}&qnaCategory=${qnaCategory}">${i}</a></li>	
 										</c:otherwise>		
 									</c:choose>
 									<!-- LastPage이면 다음 페이지 번호를 출력하지 않는다 -->
