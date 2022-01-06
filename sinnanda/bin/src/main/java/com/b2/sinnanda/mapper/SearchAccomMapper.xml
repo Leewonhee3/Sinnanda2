@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.b2.sinnanda.mapper.SearchAccomMapper">
+	
+	<!-- [이원희] 숙소 List Map -->
+	<resultMap type="com.b2.sinnanda.vo.Accom" id="AccomListMap">
+		<id column="accom_no" property="accomNo"/>
+		<result column="host_no" property="hostNo"/>
+		<result column="admin_no" property="adminNo"/>
+		<result column="commission_no" property="commissionNo"/>
+		<result column="accom_category_no" property="accomCategoryNo"/>
+		<result column="accom_category_name" property="accomCategoryName"/>
+		<result column="accom_rate" property="accomRate"/>
+		<result column="accom_name" property="accomName"/>
+		<result column="accom_img" property="accomImg"/>
+		<result column="accom_description" property="accomDescription"/>
+		<result column="create_date" property="createDate"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="accom_addr" property="accomAddr"/>
+	</resultMap>
+
+	<!-- [이원희] 숙소 목록 조회 -->
+	<select id="selectAccomListByName" parameterType="Map" resultMap="AccomListMap">
+		<!-- 
+		
+		SELECT a.accom_no, 
+			   a.host_no, 
+			   a.admin_no,
+			   a.commission_no,
+			   a.accom_category_no, 
+			   ac.accom_category_name, 
+			   a.accom_name, 
+			   a.accom_img, 
+			   a.accom_description, 
+			   a.create_date, 
+			   a.update_date 
+			   FROM accom a JOIN accom_category ac ON a.accom_category_no = ac.accom_category_no WHERE a.accom_name LIKE CONCAT('%',#{accomName},'%') 
+			   AND ac.accom_category_name= #{accomCategoryName}
+			   ORDER BY create_date DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+		 -->
+		<!--
+		SELECT accom.accom_no, 
+			   accom.host_no, 
+			   accom.admin_no, 
+			   accom.commission_no,
+			   accom_category.accom_category_name,
+			   accom.accom_name,
+			   accom.accom_img,
+			   accom.accom_description, 
+			   accom.create_date, 
+			   accom.update_date 
+			   FROM accom join accom_category ON accom.accom_category_no = accom_category.accom_category_no 
+				WHERE accom_category_name IN 
+				<foreach collection="accomCategory1" item="value" index="idx" separator="," open="(" close=")">
+    				#{value}
+    			</foreach>
+				AND 
+				accom.accom_name LIKE CONCAT('%',#{accomName},'%')
+				ORDER BY accom.create_date DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+		-->
+		
+		SELECT a.accom_no, 
+			   a.host_no, 
+			   a.admin_no, 
+			   a.commission_no,
+			   accom_category.accom_category_name,
+			   a.accom_name,
+			   ad.sido,
+			   ad.sigungu,
+			   ad.road_name,
+			   ad.main_building_code,
+			   ad.sub_building_code,
+			   ad.building_name,
+			   acd.address_detail,
+			   ((sum(rev.review_rank)/COUNT(rev.review_rank))/2) AS accom_rate,
+			   a.accom_img,
+			   a.accom_description, 
+			   a.create_date, 
+			   a.update_date,
+			    GROUP_CONCAT(DISTINCT ad.sido," ", 
+								ad.sigungu," ",
+								ad.road_name," ",
+								ad.main_building_code," ",
+			   				ad.sub_building_code,' ',
+			   				ad.building_name," ",
+			   				acd.address_detail) AS accom_addr
+			   FROM accom a 
+				LEFT JOIN accom_category ON a.accom_category_no = accom_category.accom_category_no 
+				LEFT JOIN room r ON r.accom_no = a.accom_no 
+				LEFT JOIN reserve re ON r.room_no = re.room_no 
+				LEFT JOIN payment pa ON pa.reserve_no = re.reserve_no 
+				LEFT JOIN review rev ON rev.payment_no = pa.payment_no
+				LEFT JOIN accom_address acd ON a.accom_no = acd.accom_no
+				LEFT JOIN address ad ON acd.address_no = ad.address_no 
+				WHERE accom_category_name IN
+				<foreach collection="accomCategory1" item="value" index="idx" separator="," open="(" close=")">
+    				#{value}
+    			</foreach>
+				AND
+				a.accom_name LIKE CONCAT('%',#{accomName},'%')
+				  
+				GROUP BY a.accom_name HAVING
+				<foreach collection="accomRate" item="rank" index="idx" separator=" OR " open="(" close=")">
+					<if test="rank eq 1" >
+					<![CDATA[
+						accom_rate <= 1.9 OR accom_rate IS NULL
+					]]>
+					</if>
+					
+					<if test="rank eq 2" >
+					<![CDATA[
+					    accom_rate >= 2.0 AND accom_rate <= 2.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 3" >
+					<![CDATA[	
+						accom_rate >= 3.0 AND accom_rate <= 3.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 4" >
+					<![CDATA[	
+						accom_rate >= 4.0 AND accom_rate <= 4.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 5" >
+					<![CDATA[	
+						accom_rate >= 5.0 
+					]]>
+					</if>
+				</foreach>
+				ORDER BY a.create_date DESC 
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- [이원희] 검색 대상 숙소 갯수 조회-->
+	<select id="selectAccomTotalCount" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM (SELECT a.accom_no, 
+			   a.host_no, 
+			   a.admin_no, 
+			   a.commission_no,
+			   accom_category.accom_category_name,
+			   a.accom_name,
+			   ad.sido,
+			   ad.sigungu,
+			   ad.road_name,
+			   ad.main_building_code,
+			   ad.sub_building_code,
+			   ad.building_name,
+			   acd.address_detail,
+				((sum(rev.review_rank)/COUNT(rev.review_rank))/2) AS accom_rate,
+			   a.accom_img,
+			   a.accom_description, 
+			   a.create_date, 
+			   a.update_date 
+			   FROM accom a 
+				LEFT JOIN accom_category ON a.accom_category_no = accom_category.accom_category_no 
+				LEFT JOIN room r ON r.accom_no = a.accom_no 
+				LEFT JOIN reserve re ON r.room_no = re.room_no 
+				LEFT JOIN payment pa ON pa.reserve_no = re.reserve_no 
+				LEFT JOIN review rev ON rev.payment_no = pa.payment_no
+				LEFT JOIN accom_address acd ON a.accom_no = acd.accom_no
+				LEFT JOIN address ad ON acd.address_no = ad.address_no 
+				WHERE accom_category_name IN
+				<foreach collection="accomCategory1" item="value" index="idx" separator="," open="(" close=")">
+    				#{value}
+    			</foreach>
+				AND
+				a.accom_name LIKE CONCAT('%',#{accomName},'%')
+				GROUP BY a.accom_name HAVING
+				<foreach collection="accomRate" item="rank" index="idx" separator=" OR " open="(" close=")">
+					<if test="rank eq 1" >
+					<![CDATA[
+						accom_rate <= 1.9 OR accom_rate IS NULL
+					]]>
+					</if>
+					
+					<if test="rank eq 2" >
+					<![CDATA[
+					    accom_rate >= 2.0 AND accom_rate <= 2.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 3" >
+					<![CDATA[	
+						accom_rate >= 3.0 AND accom_rate <= 3.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 4" >
+					<![CDATA[	
+						accom_rate >= 4.0 AND accom_rate <= 4.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 5" >
+					<![CDATA[	
+						accom_rate >= 5.0 
+					]]>
+					</if>
+				</foreach>
+				) result
+	</select>
+	
+	<!-- [이원희] 검색 대상 숙소 별점 조회 -->
+	<select id="selectAccomRank" parameterType="Map" resultType ="double">
+		SELECT ((sum(rev.review_rank)/COUNT(rev.review_rank))/2) AS accom_rate
+		FROM accom a
+		JOIN accom_category ON a.accom_category_no = accom_category.accom_category_no
+		LEFT JOIN room r ON r.accom_no = a.accom_no 
+		LEFT JOIN reserve re ON r.room_no = re.room_no 
+		LEFT JOIN payment pa ON pa.reserve_no = re.reserve_no 
+		LEFT JOIN review rev ON rev.payment_no = pa.payment_no
+		LEFT JOIN accom_address acd ON a.accom_no = acd.accom_no
+		LEFT JOIN address ad ON acd.address_no = ad.address_no 
+		WHERE accom_category_name IN
+				<foreach collection="accomCategory1" item="value" index="idx" separator="," open="(" close=")">
+    				#{value}
+    			</foreach>
+				AND
+				a.accom_name LIKE CONCAT('%',#{accomName},'%')
+		
+				GROUP BY a.accom_name HAVING
+				<foreach collection="accomRate" item="rank" index="idx" separator=" OR " open="(" close=")">
+					<if test="rank eq 1" >
+					<![CDATA[
+						accom_rate <= 1.9 OR accom_rate IS NULL
+					]]>
+					</if>
+					
+					<if test="rank eq 2" >
+					<![CDATA[
+					    accom_rate >= 2.0 AND accom_rate <= 2.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 3" >
+					<![CDATA[	
+						accom_rate >= 3.0 AND accom_rate <= 3.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 4" >
+					<![CDATA[	
+						accom_rate >= 4.0 AND accom_rate <= 4.99 
+					]]>
+					</if>
+					
+					<if test="rank eq 5" >
+					<![CDATA[	
+						accom_rate >= 5.0 
+					]]>
+					</if>
+				</foreach>
+		ORDER BY a.create_date DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- [이원희] 숙소 One Map -->
+	<resultMap type="com.b2.sinnanda.vo.Room" id="RoomMap">
+		<id column="room_no" property="roomNo"/>
+		<result column="accom_no" property="accomNo"/>
+		<result column="room_name" property="roomName"/>
+		<result column="room_main_img" property="roomMainImg"/>
+		<result column="room_description" property="roomDescription"/>
+		<result column="room_person" property="roomPerson"/>
+		<result column="room_price" property="roomPrice"/>
+		<result column="room_check_in" property="roomCheckIn"/>
+		<result column="room_check_out" property="roomCheckOut"/>
+		<result column="room_use" property="roomUse"/>
+		<result column="create_date" property="createDate"/>
+		<result column="update_date" property="updateDate"/>
+	</resultMap>
+	
+	<!-- [이원희] 숙소 정보조회-->
+	
+	<select id="selectAccomOne" parameterType="Integer" resultMap ="AccomListMap">
+		SELECT accom_no, 
+			   host_no, 
+			   admin_no, 
+			   commission_no, 
+			   accom_name, 
+			   accom_img, 
+			   accom_description, 
+			   create_date, 
+			   update_date 
+			   FROM accom WHERE accom_no = #{accomNo}
+	</select>
+	<!-- [이원희] 숙소 객실 리스트 조회!-->
+
+	<select id="selectAccomOneByRoom" parameterType="Integer" resultMap="RoomMap">
+		SELECT r.room_no, 
+			   r.room_name, 
+			   r.room_main_img, 
+               r.room_person, 
+  			   r.room_price, 
+			   r.room_check_in, 
+			   r.room_check_out, 
+	   	       r.room_use
+		FROM room r 
+		LEFT JOIN accom a ON r.accom_no = a.accom_no
+		WHERE a.accom_no = #{accomNo}
+	</select>
+	
+	<!-- [이원희] 객실 정보 조회 -->
+	
+	<select id="selectRoomOne" parameterType="Integer" resultMap="RoomMap">
+		SELECT r.room_no, 
+			   r.room_name, 
+			   r.room_main_img,
+			   r.room_description,
+               r.room_person, 
+  			   r.room_price, 
+			   r.room_check_in, 
+			   r.room_check_out, 
+	   	       r.room_use
+		FROM room r 
+		WHERE r.room_no = #{roomNo}
+	</select>
+	 
+</mapper>

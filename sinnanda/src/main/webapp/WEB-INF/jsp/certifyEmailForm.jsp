@@ -27,11 +27,11 @@
         <div class="row w-100 mx-0">
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-              <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
-              </div>
-              <h4>Email Certify</h4>
-              <h6 class="font-weight-light">Sign in to continue.</h6>
+              <div class="brand-logo" style="text-align: center;">
+								<a href="index"><img src="images/logo/logo_myPage.svg" alt="logo"></a>
+			  </div>
+              <h4>계정 인증</h4>
+              <h6 class="font-weight-light">이메일로 발송된 인증 코드를 입력하세요</h6>
               <form class="pt-3" id="certifyForm" action="/certifyMember" method="post">
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" name="memberId" id="memberId" value="${loginUser.member.memberId}" readonly="readonly">
@@ -43,10 +43,9 @@
                   <input type="password" class="form-control form-control-lg" name="memberCertifycode" id="memberCertifycode" placeholder="인증 코드 입력">
                 </div>
                 <div class="mt-3">
-                  <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">SIGN IN</button>
+                  <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">인증하기</button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  Do you want to go to the main? <a href="index" class="text-primary">Go to Main</a>
                 </div>
               </form>
             </div>
