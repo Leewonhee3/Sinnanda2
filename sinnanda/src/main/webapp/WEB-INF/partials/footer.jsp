@@ -17,11 +17,11 @@
 			</div>
 		</div>
 		<div class="col-md" style="text-align: center;">
-			<a href="/termsOfUse">이용약관</a>
+			<a href="termsOfUse">이용약관</a>
 			|
-			<a href="/privacyPolicy">개인정보처리방침</a>
+			<a href="privacyPolicy">개인정보처리방침</a>
 			|
-			<a href="/qnaList">문의사항</a>
+			<a href="qnaList">문의사항</a>
 		</div>
 	</div>
 	<div style="text-align: center;">

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<div class="hero-wrap js-fullheight" style="background-image: url('/images/bg_1.jpg');">
+<div class="hero-wrap js-fullheight" style="background-image: url('images/bg_1.jpg');">
 	<div class="container">
 		<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
 			<div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
