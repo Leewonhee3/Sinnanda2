@@ -82,7 +82,7 @@
 													<td style="text-align:center;">${reserve.accomName}</td>
 													<td style="text-align:center;">${reserve.reserveUse}</td>
 													<td style="text-align:center;"><fmt:formatNumber value="${reserve.paymentPrice}" pattern="#,###" />원</td>
-													<td style="text-align:center;"><a href="/member/myReserveOne?reserveNo=${reserve.reserveNo}">상세보기</a></td>
+													<td style="text-align:center;"><a href="myReserveOne?reserveNo=${reserve.reserveNo}">상세보기</a></td>
 												</tr>
 											</c:forEach>
 										</table>

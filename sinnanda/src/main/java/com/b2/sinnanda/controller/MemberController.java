@@ -442,10 +442,15 @@ public class MemberController {
     // [유동진] 지역별 방문 횟수
     @GetMapping("member/myFavoriteAddress")
     public String getmyMavoriteAddress() {
-		return "member/myFavoriteAddress";
-  	  
+		return "member/myFavoriteAddress";	  
     }
 	
+    // [유동진] 자주 방문한 지역
+    @GetMapping("member/myAreaVisitRecord")
+    public String getMyAreaVisitRecord() {
+		return "member/myAreaVisitRecord";	  
+    }
+    
 	//	[김영후] 회원 가입
 	@GetMapping("/insertMember")
 	public String getInsertMember() {

@@ -329,6 +329,12 @@ public class MemberService {
 		Map<String, Object>  map = memberMapper.myFavoriteAddress(year, memberNo, sido);
 		return map;
 	}
+	
+	// [유동진] 자주 방문한 지역
+	public Map <String, Object> getMyAreaVisitRecord(int year, int memberNo, String sido){
+		Map<String, Object>  map = memberMapper.myAreaVisitRecord(year, memberNo, sido);
+		return map;
+	}
 
 	//	[김영후] 회원 이메일 인증
 	public int certifyMember(Member member) {

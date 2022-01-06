@@ -26,12 +26,9 @@
 	<!-- endinject -->
 	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
 	
-	<title>결제금액 조회 페이지</title>
+	<title>자주 방문한 지역 차트 페이지</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
-	
-	
-	
 </head>
 <body>
 	<div class="container-scroller">
@@ -58,11 +55,11 @@
 								<div class="card-body">
 									<span class="subheading">
 										<a href="myPage?memberNo=${loginUser.member.memberNo}">메인(내정보)</a> >
-										결제한 금액
+										자주 방문한 지역
 									</span>
 									
-									<h1 style="margin-top: 10px;"><strong>내가 결제한 금액</strong></h1>
-									
+									<h1 style="margin-top: 10px;"><strong>자주 방문한 지역</strong></h1>
+																			
 									<div class="container">
 										<select id="yearNo" name="yearNo" class="form-control-sm" style="float: right; margin-bottom: 20px; height:35px;" >
 											<option value="">년도 선택</option>
@@ -73,7 +70,6 @@
 										
 										<canvas id="myChart" width="100" height="40"></canvas>
 									</div>
-									
 								</div>
 							</div>
 						</div>
@@ -97,23 +93,28 @@
 	      
 	      $.ajax({
 	         type:'get',
-	         url:'/member/getMemberPaymentChart?year=' + year,
+	         url:'/member/getMyAreaVisitRecord?year=' + year,
 	         success:function(json){
 	            console.log(json);
 	            
 	            let myData = [];
-	            myData.push(json.january);
-	            myData.push(json.february);
-	            myData.push(json.march);
-	            myData.push(json.april);
-	            myData.push(json.may);
-	            myData.push(json.june);
-	            myData.push(json.july);
-	            myData.push(json.august);
-	            myData.push(json.september);
-	            myData.push(json.october);
-	            myData.push(json.november);
-	            myData.push(json.december);
+	            myData.push(json.강원);
+	            myData.push(json.경기);
+	            myData.push(json.경남);
+	            myData.push(json.경북);
+	            myData.push(json.광주);
+	            myData.push(json.대구);
+	            myData.push(json.대전);
+	            myData.push(json.부산);
+	            myData.push(json.서울);
+	            myData.push(json.세종특별자치시);
+	            myData.push(json.울산);
+	            myData.push(json.인천);
+	            myData.push(json.전남);
+	            myData.push(json.전북);
+	            myData.push(json.제주특별자치도);
+	            myData.push(json.충남);
+	            myData.push(json.충북);
 	          
 	            //총값 
 				let result  = myData.reduce((accumulator,currentNumber)=> accumulator + currentNumber);
@@ -123,9 +124,9 @@
 	            myChart = new Chart(ctx, {
 	                type: 'bar',
 	                data: {
-	                    labels: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	                    labels: ['강원', '경기', '경남', '경북', '광주', '대구', '대전', '부산', '서울', '세종', '울산', '인천', '전남', '전북', '제주', '충남', '충북'],
 	                    datasets: [{
-	                        label: '결제금액',
+	                        label: '방문횟수',
 	                        data: myData,
 	                        backgroundColor: [
 	                        	 'rgba(54, 162, 235, 0.2)'
@@ -142,7 +143,7 @@
 	                	 plugins: {
 	                         title: {
 	                             display: true,
-	                             text: '# 총 결제금액 : '+result.toLocaleString() +' 원'
+	                             text: '# 총 방문횟수 : '+result.toLocaleString() +' 회'
 	                         }
 	                     },
 	                    scales: {
@@ -163,9 +164,11 @@
 	   });
 	
 	  </script>
+	
 	<!-- [이승준] 하단 Footer - SATRT -->
 	<%@ include file="/WEB-INF/partials/footer.jsp" %>
 	<!-- [이승준] 하단 Footer - END -->
+
 
 	<script src="/js/dashboard.js"></script>
 	<script src="/vendors/js/vendor.bundle.base.js"></script>

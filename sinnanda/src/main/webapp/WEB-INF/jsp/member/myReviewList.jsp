@@ -83,12 +83,12 @@
 													<td style="text-align:center;">
 														<c:choose>
 															<c:when test="${fn:length(review.reviewContent) > 20}">
-																<a href="<%=request.getContextPath() %>/searchAccomOne?accomNo=${review.accomNo}">
+																<a href="${pageContext.request.contextPath}/searchAccomOne?accomNo=${review.accomNo}">
 															 		<c:out value="${fn:substring(review.reviewContent,0,20)}"/>...
 															 	</a>
 															</c:when>
 														 	<c:otherwise>
-										            			<a href="<%=request.getContextPath() %>/searchAccomOne?accomNo=${review.accomNo}"><c:out value="${review.reviewContent}"/></a>
+										            			<a href="${pageContext.request.contextPath}/searchAccomOne?accomNo=${review.accomNo}"><c:out value="${review.reviewContent}"/></a>
 										          			 </c:otherwise>
 														</c:choose>
 													</td>

@@ -64,7 +64,8 @@
 									<h1 style="margin-top: 10px;"><strong>서비스 이용 횟수</strong></h1>
 									<div class="container">
 										<select id="yearNo" name="yearNo" class="form-control-sm" style="float: right; margin-bottom: 20px; height:35px;" >
-											<option value="">년도 선택</option>            
+											<option value="">년도 선택</option> 
+											<option value="2022">2022년</option>           
 											<option value="2021">2021년</option>
 											<option value="2020">2020년</option>
 										</select>

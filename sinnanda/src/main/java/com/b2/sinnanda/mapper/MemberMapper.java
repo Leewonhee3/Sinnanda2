@@ -86,6 +86,9 @@ public interface MemberMapper {
 	// [유동진] 지역별 방문 횟수 차트
 	Map<String, Object> myFavoriteAddress(int year, int memberNo, String sido);
 	
+	// [유동진] 자주 방문한 지역
+	Map<String, Object> myAreaVisitRecord(int year, int memberNo, String sido);
+	
 	//	[김영후] 회원 가입
 	int insertMember(Member member);
 	

@@ -25,15 +25,15 @@
 					<!-- 사용자별 이미지 -->
 					<c:if test = "${loginUser != null}">
 						<c:if test="${loginUser.userLevel == 1}">
-							<img src="${pageContext.request.contextPath}images/memberImg/memberIcon.png" width="20px" height="20px" alt="profile"/>
+							<img src="${pageContext.request.contextPath}/images/memberImg/memberIcon.png" width="20px" height="20px" alt="profile"/>
 							${loginUser.member.memberName}&nbsp;회원님
 						</c:if>
 						<c:if test="${loginUser.userLevel == 2}">
-							<img src="${pageContext.request.contextPath}images/myPage/defaultHostImg.png" alt="profile"/>
+							<img src="${pageContext.request.contextPath}/images/myPage/defaultHostImg.png" alt="profile"/>
 							${loginUser.host.hostName}&nbsp;사업자
 						</c:if>
 						<c:if test="${loginUser.userLevel == 3}">
-							<img src="${pageContext.request.contextPath}images/myPage/defaultAdminImg.png" alt="profile"/>
+							<img src="${pageContext.request.contextPath}/images/myPage/defaultAdminImg.png" alt="profile"/>
 							${loginUser.admin.adminName}&nbsp;관리자
 						</c:if>
 					</c:if>
@@ -61,7 +61,7 @@
 							</a>
 						</c:if>
 					</c:if>
-					<a class="dropdown-item" href ="${pageContext.request.contextPath}logout">
+					<a class="dropdown-item" href ="${pageContext.request.contextPath}/logout">
 						<i class="ti-power-off text-primary"></i>
 						로그아웃
 					</a>

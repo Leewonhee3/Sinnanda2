@@ -86,7 +86,7 @@
 														</c:if>
 														<a href="myQnaOne?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a>
 														<c:if test="${qna.qnaSecret == '비밀문의'}">
-															<img src="/images/qna/lockImg.png" style="width: 20px; height: 20px;">
+															<img src="${pageContext.request.contextPath}/images/qna/lockImg.png" style="width: 20px; height: 20px;">
 														</c:if>
 													</td>
 													<td style="text-align:center">${qna.qnaCategory}</td>

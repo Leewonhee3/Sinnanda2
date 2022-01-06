@@ -572,6 +572,42 @@
 	    AND addr.sido = #{sido}
 	</select>
 	
+	<!-- [유동진] 자주 방문한 지역 -->
+	<select id ="myAreaVisitRecord" parameterType="Map" resultType="java.util.Map">
+		SELECT 
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='강원')  THEN addr.sido END),0) 강원,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='경기') THEN addr.sido END),0) 경기,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='경남')  THEN addr.sido END),0) 경남,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='경북')  THEN addr.sido END),0) 경북,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='광주') THEN addr.sido END),0) 광주,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='대구')  THEN addr.sido END),0) 대구,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='대전')  THEN addr.sido END),0) 대전,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='부산')  THEN addr.sido END),0) 부산,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='서울')  THEN addr.sido END),0) 서울,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='세종특별자치시')  THEN addr.sido END),0) 세종특별자치시,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='울산')  THEN addr.sido END),0) 울산,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='인천')  THEN addr.sido END),0) 인천,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='전남') THEN addr.sido END),0) 전남,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='전북')  THEN addr.sido END),0) 전북,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='제주특별자치도')  THEN addr.sido END),0) 제주특별자치도,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='충남')  THEN addr.sido END),0) 충남,
+	     	IFNULL(COUNT(CASE WHEN (addr.sido ='충북')  THEN addr.sido END),0) 충북   	
+		FROM  payment pa 
+			LEFT JOIN reserve re
+			   ON pa.reserve_no = re.reserve_no
+			LEFT JOIN room ro
+			   ON re.room_no = ro.room_no
+			LEFT JOIN accom ac
+			   ON ro.accom_no = ac.accom_no
+			LEFT JOIN accom_address acd
+			   ON ac.accom_no = acd.accom_no
+			LEFT JOIN address addr
+			    ON acd.address_no = addr.address_no
+			 WHERE re.member_no = #{memberNo}
+			    AND YEAR(pa.update_date) = #{year}   
+			    AND re.reserve_use = '이용 완료'
+		</select> 
+	
 	<!-- [김영후] 회원 가입 -->
 	<insert id="insertMember" parameterType="com.b2.sinnanda.vo.Member">
 		INSERT INTO 

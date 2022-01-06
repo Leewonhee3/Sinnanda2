@@ -172,12 +172,26 @@ public class ChartRestController {
          @GetMapping("/member/getMyFavoriteAddress")
          public Map<String,Object> myFavoriteAddress(HttpSession session, 
         		 									@RequestParam(name ="year") int year,
-        		 									@RequestParam(defaultValue = "전체") String sido) {
+        		 									@RequestParam(defaultValue = "강원") String sido) {
       	   
       	   User loginUser = (User)session.getAttribute("loginUser");
       	   dl.p("ChartRestController", "favoriteAddress()", "loginUser : " + loginUser);
       	   
       	   Map<String,Object> map = memberService.getMyFavoriteAddress(year, loginUser.getMember().getMemberNo(), sido);
+      
+      	   return map;  
+         }
+         
+         // [유동진] 자주 방문한 지역 
+         @GetMapping("/member/getMyAreaVisitRecord")
+         public Map<String,Object> myAreaVisitRecord(HttpSession session, 
+        		 									@RequestParam(name ="year") int year,
+        		 									@RequestParam(defaultValue = "전체") String sido) {
+      	   
+      	   User loginUser = (User)session.getAttribute("loginUser");
+      	   dl.p("ChartRestController", "myAreaVisitRecord()", "loginUser : " + loginUser);
+      	   
+      	   Map<String,Object> map = memberService.getMyAreaVisitRecord(year, loginUser.getMember().getMemberNo(), sido);
       
       	   return map;  
          }

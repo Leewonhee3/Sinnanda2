@@ -12,22 +12,22 @@
 			</a>
 			<div class="collapse" id="member-info">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" href="/member/checkMemberPw">PW 수정</a></li>
-					<li class="nav-item"> <a class="nav-link" href="/member/modifyMember">정보 수정</a></li>
-					<li class="nav-item"> <a class="nav-link" href="/member/memberOutForm">회원탈퇴</a></li>
+					<li class="nav-item"> <a class="nav-link" href="../member/checkMemberPw">PW 수정</a></li>
+					<li class="nav-item"> <a class="nav-link" href="../member/modifyMember">정보 수정</a></li>
+					<li class="nav-item"> <a class="nav-link" href="../member/memberOutForm">회원탈퇴</a></li>
 				</ul>
 			</div>
 		</li>
 		
 		<li class="nav-item">
-			<a class="nav-link" href="member/myReserveList">
+			<a class="nav-link" href="../member/myReserveList">
 				<i class="icon-grid menu-icon"></i>
 				<span class="menu-title">예약 내역</span>
 			</a>
 		</li>
 		
 		<li class="nav-item">
-			<a class="nav-link" href="member/">
+			<a class="nav-link" href="../member/">
 				<i class="icon-columns menu-icon"></i>
 				<span class="menu-title">보유 쿠폰</span>
 			</a>
@@ -41,9 +41,9 @@
 			</a>
 			<div class="collapse" id=member-community>
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" href="member/myQnaList">작성한 QnA</a></li>
-					<li class="nav-item"> <a class="nav-link" href="member/myReviewList">작성한 리뷰</a></li>
-					<li class="nav-item"> <a class="nav-link" href="member/myComplainList">작성한 컴플레인</a></li>
+					<li class="nav-item"> <a class="nav-link" href="../member/myQnaList">작성한 QnA</a></li>
+					<li class="nav-item"> <a class="nav-link" href="../member/myReviewList">작성한 리뷰</a></li>
+					<li class="nav-item"> <a class="nav-link" href="../member/myComplainList">작성한 컴플레인</a></li>
 				</ul>
 			</div>
 		</li>
@@ -56,7 +56,7 @@
 			</a>
 			<div class="collapse" id=member-calculate>
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" href="member/memberPaymentChart">결제한 금액 조회</a></li>
+					<li class="nav-item"> <a class="nav-link" href="../member/memberPaymentChart">결제한 금액 조회</a></li>
 				</ul>
 			</div>
 		</li>
@@ -69,9 +69,9 @@
 			</a>
 			<div class="collapse" id=member-statistics>
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" href="member/memberUseChart">이용횟수</a></li>
-					<li class="nav-item"> <a class="nav-link" href="member/myFavoriteAddress">지역별 방문 횟수</a></li>
-					<li class="nav-item"> <a class="nav-link" href="member/">자주 방문한 지역</a></li>
+					<li class="nav-item"> <a class="nav-link" href="../member/memberUseChart">이용횟수</a></li>
+					<li class="nav-item"> <a class="nav-link" href="../member/myFavoriteAddress">지역별 방문 횟수</a></li>
+					<li class="nav-item"> <a class="nav-link" href="../member/myAreaVisitRecord">자주 방문한 지역</a></li>
 				</ul>
 			</div>
 		</li>
