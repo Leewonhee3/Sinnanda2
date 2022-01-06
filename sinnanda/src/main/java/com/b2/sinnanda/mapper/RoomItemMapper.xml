@@ -35,8 +35,8 @@
 			ri.room_item_name, 
 			ri.room_item_img
 		FROM room r 
-			LEFT JOIN room_item_inven rii ON rii.room_no = r.room_no
-			LEFT JOIN room_item ri ON ri.room_item_no = rii.room_item_no
+			JOIN room_item_inven rii ON rii.room_no = r.room_no
+			JOIN room_item ri ON ri.room_item_no = rii.room_item_no
 		WHERE r.room_no = #{roomNo}
 	</select>
 </mapper>

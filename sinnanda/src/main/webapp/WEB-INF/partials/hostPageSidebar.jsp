@@ -5,14 +5,14 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
 	<ul class="nav">
 		<li class="nav-item">
-			<a class="nav-link" href="/host/myHostInfo?hostNo=${loginUser.host.hostNo}">
+			<a class="nav-link" href="myHostInfo?hostNo=${loginUser.host.hostNo}">
 				<i class="icon-head menu-icon"></i>
 				<span class="menu-title">사업자 정보</span>
 			</a>
 		</li>
 		
 		<li class="nav-item">
-			<a class="nav-link" href="/host/myReserveList">
+			<a class="nav-link" href="myReserveList">
 				<i class="icon-grid menu-icon"></i>
 				<span class="menu-title">예약 일정</span>
 			</a>
@@ -33,9 +33,9 @@
 			</a>
 			<div class="collapse" id="host-community">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" href="/host/myComplainList">컴플레인 관리</a></li>
-					<li class="nav-item"> <a class="nav-link" href="/host/myReviewList">리뷰 관리</a></li>
-					<li class="nav-item"> <a class="nav-link" href="/host/myHostQnaList">사업자 문의 관리</a></li>
+					<li class="nav-item"> <a class="nav-link" href="myComplainList">컴플레인 관리</a></li>
+					<li class="nav-item"> <a class="nav-link" href="myReviewList">리뷰 관리</a></li>
+					<li class="nav-item"> <a class="nav-link" href="myHostQnaList">사업자 문의 관리</a></li>
 				</ul>
 			</div>
 		</li>
@@ -48,8 +48,8 @@
 			</a>
 			<div class="collapse" id=host-calculate>
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" href="/host/myHostRevenue?hostNo=${loginUser.host.hostNo}">숙소 수입</a></li>
-					<li class="nav-item"> <a class="nav-link" href="/host/myHostCommission">숙소 수수료</a></li>
+					<li class="nav-item"> <a class="nav-link" href="myHostRevenue?hostNo=${loginUser.host.hostNo}">숙소 수입</a></li>
+					<li class="nav-item"> <a class="nav-link" href="myHostCommission">숙소 수수료</a></li>
 				</ul>
 			</div>
 		</li>
@@ -62,8 +62,8 @@
 			</a>
 			<div class="collapse" id=host-statistics>
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"> <a class="nav-link" href="/host/hostComplainChart">컴플레인</a></li>
-					<li class="nav-item"> <a class="nav-link" href="/host/hostReviewChart">리뷰</a></li>
+					<li class="nav-item"> <a class="nav-link" href="hostComplainChart">컴플레인</a></li>
+					<li class="nav-item"> <a class="nav-link" href="hostReviewChart">리뷰</a></li>
 				</ul>
 			</div>
 		</li>

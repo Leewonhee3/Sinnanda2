@@ -6,8 +6,8 @@
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 	<!-- 좌측 상단 로고 이미지 -->
 	<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-		<a class="navbar-brand brand-logo mr-5" href="/index"><img src="/images/logo/logo_myPage.svg" class="mr-2" alt="logo"/></a>
-		<a class="navbar-brand brand-logo-mini" href="/index"><img src="/images/logo/logo_myPage_mini.svg" alt="logo"/></a>
+		<a class="navbar-brand brand-logo mr-5" href="${pageContext.request.contextPath}/index"><img src="${pageContext.request.contextPath}/images/logo/logo_myPage.svg" class="mr-2" alt="logo"/></a>
+		<a class="navbar-brand brand-logo-mini" href="${pageContext.request.contextPath}/index"><img src="${pageContext.request.contextPath}/images/logo/logo_myPage_mini.svg" alt="logo"/></a>
 	</div>
 	
 	<!-- 우측 상단 메뉴  -->
@@ -25,15 +25,15 @@
 					<!-- 사용자별 이미지 -->
 					<c:if test = "${loginUser != null}">
 						<c:if test="${loginUser.userLevel == 1}">
-							<img src="/images/memberImg/memberIcon.png" width="20px" height="20px" alt="profile"/>
+							<img src="${pageContext.request.contextPath}/images/memberImg/memberIcon.png" width="20px" height="20px" alt="profile"/>
 							${loginUser.member.memberName}&nbsp;회원님
 						</c:if>
 						<c:if test="${loginUser.userLevel == 2}">
-							<img src="/images/myPage/defaultHostImg.png" alt="profile"/>
+							<img src="${pageContext.request.contextPath}/images/myPage/defaultHostImg.png" alt="profile"/>
 							${loginUser.host.hostName}&nbsp;사업자
 						</c:if>
 						<c:if test="${loginUser.userLevel == 3}">
-							<img src="/images/myPage/defaultAdminImg.png" alt="profile"/>
+							<img src="${pageContext.request.contextPath}/images/myPage/defaultAdminImg.png" alt="profile"/>
 							${loginUser.admin.adminName}&nbsp;관리자
 						</c:if>
 					</c:if>
@@ -43,25 +43,25 @@
 					<!-- 사용자별 마이페이지 경로 -->
 					<c:if test = "${loginUser != null}">
 						<c:if test="${loginUser.userLevel == 1}">
-							<a class="dropdown-item" href ="/member/myPage?memberNo=${loginUser.member.memberNo}">
+							<a class="dropdown-item" href ="myPage?memberNo=${loginUser.member.memberNo}">
 								<i class="ti-settings text-primary">마이페이지로 이동</i>
 								
 							</a>
 						</c:if>
 						<c:if test="${loginUser.userLevel == 2}">
-							<a class="dropdown-item" href ="/host/hostPage?hostNo=${loginUser.host.hostNo}">
+							<a class="dropdown-item" href ="hostPage?hostNo=${loginUser.host.hostNo}">
 								<i class="ti-settings text-primary"></i>
 								마이페이지
 							</a>
 						</c:if>
 						<c:if test="${loginUser.userLevel == 3}">
-							<a class="dropdown-item" href ="/admin/adminPage?adminNo=${loginUser.admin.adminNo}">
+							<a class="dropdown-item" href ="adminPage?adminNo=${loginUser.admin.adminNo}">
 								<i class="ti-settings text-primary"></i>
 								마이페이지
 							</a>
 						</c:if>
 					</c:if>
-					<a class="dropdown-item" href ="/logout">
+					<a class="dropdown-item" href ="${pageContext.request.contextPath}/logout">
 						<i class="ti-power-off text-primary"></i>
 						로그아웃
 					</a>

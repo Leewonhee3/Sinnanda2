@@ -26,6 +26,7 @@
 			a.accom_category_no accomCategoryNo, 
 			ac.accom_category_name accomCategoryName, 
 			a.accom_name accomName, 
+			a.accom_img accomImg, 
 			a.create_date createDate, 
 			a.update_date updateDate, 
 			c.commission_name commissionName, 

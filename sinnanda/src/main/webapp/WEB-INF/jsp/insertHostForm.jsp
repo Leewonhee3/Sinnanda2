@@ -22,6 +22,9 @@
 	<!-- 지도 API 관련 태그 -->
 	
 	<style>
+		.img{
+			border-radius:0px;
+		}
 		.idOk{
 			color: #6A82FB; 
 			display: none;
@@ -118,7 +121,7 @@
 										<input type="text" class="form-control" name="addressDetail" id="addressDetail" placeholder="상세주소">
 									</div>
 									
-									<div id="map" style="width:length;height:300px;margin-top:10px;display:none"></div>
+									<div id="map" style="width:length;height:300px;margin-top:10px;display:none;"></div>
 									
 								</div>
 								<!-- 사업자 회원 가입 값 입력 END -->

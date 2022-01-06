@@ -11,21 +11,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<!-- plugins:css -->
-	<link rel="stylesheet" href="/skydash/vendors/feather/feather.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" href="/skydash/vendors/css/vendor.bundle.base.css">
+	<link rel="stylesheet" href="../skydash/vendors/feather/feather.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" href="../skydash/vendors/css/vendor.bundle.base.css">
 	
 	<!-- endinject -->
 	<!-- Plugin css for this page -->
-	<link rel="stylesheet" href="/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" type="text/css" href="/skydash/js/select.dataTables.min.css">
+	<link rel="stylesheet" href="../skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="../skydash/js/select.dataTables.min.css">
 	
 	<!-- End plugin css for this page -->
 	
 	<!-- inject:css -->
-	<link rel="stylesheet" href="/skydash/css/vertical-layout-light/style.css">
-	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
+	<link rel="stylesheet" href="../skydash/css/vertical-layout-light/style.css">
+	<link rel="shortcut icon" href="../skydash/images/favicon.png" />
 	
 	<title>사업자 객실 페이지</title>
 </head>
@@ -111,20 +111,41 @@
 											<tr>
 												<th>비품</th>
 												<td>
-													<c:forEach items="${room.roomItemInven}" var="roomItems">
-														${roomItems.roomItem.roomItemImg}
-														${roomItems.roomItem.roomItemName}
-														${roomItems.roomItemCount}
-													</c:forEach>
+													<c:if test="${not empty room.roomItemInven}">
+														<c:forEach items="${room.roomItemInven}" var="roomItems">
+															<img src="${pageContext.request.contextPath}/images/roomItem/${roomItems.roomItem.roomItemImg}" style="border-radius:0px;">
+															${roomItems.roomItem.roomItemName}
+															${roomItems.roomItemCount}개&nbsp;&nbsp;
+														</c:forEach>
+													</c:if>
+													<c:if test="${empty room.roomItemInven}">
+														비품 없음
+													</c:if>
 												</td>
 											</tr>
 											<tr>
 												<th>이미지</th>
 												<td>
-													<c:forEach items="${room.roomImg}" var="roomImgs">
-														${roomImgs.roomImgNo}
-														${roomImgs.roomImgFile}
-													</c:forEach>
+													<table>
+														<tr>
+															<c:if test="${not empty room.roomImg}">
+																<c:forEach items="${room.roomImg}" var="roomImgs">
+																	<c:set var="i" value="${i+1}"/>
+																	<td>
+																		<div><img src="${pageContext.request.contextPath}/images/room/${roomImgs.roomImgFile}" style="width: 150px; height: 150px; border-radius:0px;"></div>
+																		<div>No.${roomImgs.roomImgNo}</div>
+																	</td>
+																	<c:if test="${i > 2}">
+																		<c:set var="i" value="0"/>
+																		<tr></tr>
+																	</c:if>
+																</c:forEach>
+															</c:if>
+															<c:if test="${empty room.roomImg}">
+																이미지 없음
+															</c:if>
+														</tr>
+													</table>
 												</td>
 											</tr>
 										</table>
@@ -144,26 +165,26 @@
 
 
 	<!-- plugins:js -->
-	<script src="/vendors/js/vendor.bundle.base.js"></script>
+	<script src="../vendors/js/vendor.bundle.base.js"></script>
 	
 	<!-- endinject -->
 	<!-- Plugin js for this page -->
-	<script src="/vendors/chart.js/Chart.min.js"></script>
-	<script src="/vendors/datatables.net/jquery.dataTables.js"></script>
-	<script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-	<script src="/js/dataTables.select.min.js"></script>
+	<script src="../vendors/chart.js/Chart.min.js"></script>
+	<script src="../vendors/datatables.net/jquery.dataTables.js"></script>
+	<script src="../vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+	<script src="../js/dataTables.select.min.js"></script>
 	
 	<!-- End plugin js for this page -->
 	<!-- inject:js -->
-	<script src="/js/off-canvas.js"></script>
-	<script src="/js/hoverable-collapse.js"></script>
-	<script src="/js/template.js"></script>
-	<script src="/js/settings.js"></script>
-	<script src="/js/todolist.js"></script>
+	<script src="../js/off-canvas.js"></script>
+	<script src="../js/hoverable-collapse.js"></script>
+	<script src="../js/template.js"></script>
+	<script src="../js/settings.js"></script>
+	<script src="../js/todolist.js"></script>
 	
 	<!-- endinject -->
 	<!-- Custom js for this page-->
-	<script src="/js/dashboard.js"></script>
-	<script src="/js/Chart.roundedBarCharts.js"></script>
+	<script src="../js/dashboard.js"></script>
+	<script src="../js/Chart.roundedBarCharts.js"></script>
 </body>
 </html>
