@@ -40,7 +40,7 @@ public class NoticeController {
 		// 수정 전 기존 값 출력
 		noticeService.removeNotice(noticeNo, loginUser.getAdmin().getAdminNo());
 		
-		return "redirect:noticeAdminList";
+		return "redirect:/admin/noticeAdminList";
 	}
 
 	//	[김영후]	notice 추가
@@ -178,7 +178,7 @@ public class NoticeController {
 		
 		noticeService.modifyNotice(notice);
 		
-		return "redirect:noticeAdminList?noticeNo="+notice.getNoticeNo();
+		return "redirect:/admin/noticeAdminList?noticeNo="+notice.getNoticeNo();
 	}
 	
 }

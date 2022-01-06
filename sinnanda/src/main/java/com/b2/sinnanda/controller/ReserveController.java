@@ -36,7 +36,7 @@ public class ReserveController {
 		Reserve reserve = reserveService.getHostMyReserveOne(reserveNo);		
 		model.addAttribute("reserve", reserve);
 		
-		return "/host/myReserveOne";
+		return "host/myReserveOne";
 	}
 	
 	//	[김영후] (사업자 페이지) MyReserveList 요청
@@ -73,7 +73,7 @@ public class ReserveController {
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
 		
-		return "/host/myReserveList";
+		return "host/myReserveList";
 	}
 	
 	//	[김영후] Reserve 추가 요청

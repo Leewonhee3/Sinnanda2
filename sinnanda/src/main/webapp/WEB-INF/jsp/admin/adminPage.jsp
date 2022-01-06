@@ -169,7 +169,7 @@
 									
 									<div class="container" style="margin-top: 20px; margin-bottom: 20px;">
 										<span style="line-heigth: 100px;">총 개수 : <strong style="color: red;">${hostQnaListTotalCount}</strong></span>
-										<a href=" hostQnaList" style="float: right; ">목록 보기</a>
+										<a href="hostQnaList" style="float: right; ">목록 보기</a>
 									</div>
 									
 								    <div class="container">

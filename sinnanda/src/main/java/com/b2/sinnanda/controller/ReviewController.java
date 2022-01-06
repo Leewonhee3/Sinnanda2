@@ -1,6 +1,5 @@
 package com.b2.sinnanda.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -61,7 +60,7 @@ public class ReviewController {
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
 		
-		return "/host/myReviewList";
+		return "host/myReviewList";
 	}
 	
 	// [이승준] "리뷰 상세" 조회 | 사업자페이지
@@ -81,7 +80,7 @@ public class ReviewController {
 		model.addAttribute("loginUser", loginUser);
 		model.addAttribute("review", review);
 		
-		return "/host/myReviewOne";
+		return "host/myReviewOne";
 	}
 	
 	

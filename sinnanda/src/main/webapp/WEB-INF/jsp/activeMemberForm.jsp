@@ -9,6 +9,6 @@
 <body>
 	<h1>이승준 낫 휴면</h1>
 	<br>
-	<button><a href="/member/activeMember">@@@ 휴면해제 @@@</a></button>
+	<a class="btn" href="/member/activeMember">@@@ 휴면해제 @@@</a>
 </body>
 </html>
