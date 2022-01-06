@@ -156,13 +156,13 @@
 	</div>
 	
 	<!-- plugins:js -->
-	<script src="/skydash/vendors/js/vendor.bundle.base.js"></script>
+	<script src="skydash/vendors/js/vendor.bundle.base.js"></script>
 	<!-- inject:js -->
-	<script src="/skydash/js/off-canvas.js"></script>
-	<script src="/skydash/js/hoverable-collapse.js"></script>
-	<script src="/skydash/js/template.js"></script>
-	<script src="/skydash/js/settings.js"></script>
-	<script src="/skydash/js/todolist.js"></script>
+	<script src="skydash/js/off-canvas.js"></script>
+	<script src="skydash/js/hoverable-collapse.js"></script>
+	<script src="skydash/js/template.js"></script>
+	<script src="skydash/js/settings.js"></script>
+	<script src="skydash/js/todolist.js"></script>
   
 	<!-- [김영후] 유효성 검사 -->
 	<script>

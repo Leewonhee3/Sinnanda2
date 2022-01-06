@@ -54,14 +54,13 @@
         <div class="row">
         	<div class="col-lg-3 sidebar">
         		
+        		<!-- [이원희] 검색리스트뷰 검색바-->
         		
         		<form action="searchAccomList" method="post" class="d-block d-flex" id="searchForm">
         		
-        		<input type="text" value="${currentPage}" id="currentPage" name="currentPage" hidden="hidden">
-        		
-        		<div class="sidebar-wrap bg-light ftco-animate">
-        			
-		             <!-- [이원희] 검색리스트뷰 검색바-->
+        			<input type="text" value="${currentPage}" id="currentPage" name="currentPage" hidden="hidden">
+        	
+        			<div class="sidebar-wrap bg-light ftco-animate">
         			
         			<h3 class="heading mb-4">숙소 상세검색</h3>
         			 
@@ -239,10 +238,10 @@
 		            </div>
 	            
 	            </form>
-        		</div>
-        		<!-- 검색바 끝 -->
-        		
+        	</div>
           </div>
+          <!--[이원희] 검색바 끝 -->
+          <!--[이원희] 검색 리스트 -->
           <div class="col-lg-9">
           	<div class="row">
           	<c:choose>
@@ -296,6 +295,8 @@
 		    	</c:otherwise>
 		    </c:choose>
           	</div>
+          	<!--[이원희] 검색 리스트 끝 -->
+          	
           	<!-- [이원희] 숙소리스트 네비게이션바-->
           	<div class="row mt-5">
 		          <div class="col text-center">

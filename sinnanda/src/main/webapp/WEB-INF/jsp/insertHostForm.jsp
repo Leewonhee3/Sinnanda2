@@ -17,8 +17,8 @@
 	<link rel="shortcut icon" href="skydash/images/favicon.png" />
 	
 	<!-- 지도 API 관련 태그 -->
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=882ef0b6751c864ad60f045a82f613ae&libraries=services"></script>	
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=882ef0b6751c864ad60f045a82f613ae&libraries=services"></script>	
 	<!-- 지도 API 관련 태그 -->
 	
 	<style>

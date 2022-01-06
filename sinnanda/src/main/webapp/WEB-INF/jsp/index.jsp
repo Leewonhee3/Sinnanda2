@@ -56,6 +56,7 @@
 								</div>
 								<select name="" id="" class="form-control" style="width: 170px;">
 									<!-- 지역 선택 -->
+									<option value="전체">전체</option>
 									
 									<c:forEach items="${sidoList}" var="sido">
 									
