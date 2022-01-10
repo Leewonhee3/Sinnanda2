@@ -98,7 +98,7 @@
 	      
 	      $.ajax({
 	         type:'get',
-	         url:'/member/getMemberUseChart?year=' + year,
+	         url:'getMemberUseChart?year=' + year,
 	         success:function(json){
 	            console.log(json);
 	            
@@ -165,7 +165,12 @@
 	
    </script>
 	
+	<script src="../js/hoverable-collapse.js"></script>
+	<script src="../js/template.js"></script>
+	<script src="../js/settings.js"></script>
+	<script src="../js/todolist.js"></script>
 	<script src="../js/dashboard.js"></script>
+	<script src="../js/Chart.roundedBarCharts.js"></script>
 	<script src="../vendors/js/vendor.bundle.base.js"></script>
 </body>
 

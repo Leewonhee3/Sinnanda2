@@ -99,7 +99,7 @@
 									      
 									      $.ajax({
 									         type:'get',
-									         url:'/member/getMyFavoriteAddress?year=' + year+'&sido='+sido,
+									         url:'getMyFavoriteAddress?year=' + year+'&sido='+sido,
 									         success:function(json){
 									            console.log(json);
 									            

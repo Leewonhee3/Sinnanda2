@@ -97,7 +97,7 @@
 	      
 	      $.ajax({
 	         type:'get',
-	         url:'/member/getMemberPaymentChart?year=' + year,
+	         url:'getMemberPaymentChart?year=' + year,
 	         success:function(json){
 	            console.log(json);
 	            
@@ -167,7 +167,12 @@
 	<%@ include file="/WEB-INF/partials/footer.jsp" %>
 	<!-- [이승준] 하단 Footer - END -->
 
+	<script src="../js/hoverable-collapse.js"></script>
+	<script src="../js/template.js"></script>
+	<script src="../js/settings.js"></script>
+	<script src="../js/todolist.js"></script>
 	<script src="../js/dashboard.js"></script>
+	<script src="../js/Chart.roundedBarCharts.js"></script>
 	<script src="../vendors/js/vendor.bundle.base.js"></script>
 </body>
 
