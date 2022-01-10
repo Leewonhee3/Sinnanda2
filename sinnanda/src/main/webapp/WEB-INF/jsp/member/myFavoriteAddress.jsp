@@ -9,22 +9,22 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- plugins:css -->
-		<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="/css/animate.css">
+		<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/animate.css">
 	
-	<link rel="stylesheet" href="/skydash/vendors/feather/feather.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" href="/skydash/vendors/css/vendor.bundle.base.css">
+	<link rel="stylesheet" href="../skydash/vendors/feather/feather.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" href="../skydash/vendors/css/vendor.bundle.base.css">
 	<!-- endinject -->
 	<!-- Plugin css for this page -->
-	<link rel="stylesheet" href="/skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-	<link rel="stylesheet" href="/skydash/vendors/ti-icons/css/themify-icons.css">
-	<link rel="stylesheet" type="text/css" href="/skydash/js/select.dataTables.min.css">
+	<link rel="stylesheet" href="../skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+	<link rel="stylesheet" href="../skydash/vendors/ti-icons/css/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="../skydash/js/select.dataTables.min.css">
 	<!-- End plugin css for this page -->
 	<!-- inject:css -->
-	<link rel="stylesheet" href="/skydash/css/vertical-layout-light/style.css">
+	<link rel="stylesheet" href="../skydash/css/vertical-layout-light/style.css">
 	<!-- endinject -->
-	<link rel="shortcut icon" href="/skydash/images/favicon.png" />
+	<link rel="shortcut icon" href="../skydash/images/favicon.png" />
 	
 	<title>지역별 방문 횟수 차트 페이지</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -186,14 +186,14 @@
 	<!-- [이승준] 하단 Footer - END -->
 
 
-	<script src="/js/dashboard.js"></script>
-	<script src="/js/hoverable-collapse.js"></script>
-	<script src="/js/template.js"></script>
-	<script src="/js/settings.js"></script>
-	<script src="/js/todolist.js"></script>
-	<script src="/js/dashboard.js"></script>
-	<script src="/js/Chart.roundedBarCharts.js"></script>
-	<script src="/vendors/js/vendor.bundle.base.js"></script>
+	<script src="../js/dashboard.js"></script>
+	<script src="../js/hoverable-collapse.js"></script>
+	<script src="../js/template.js"></script>
+	<script src="../js/settings.js"></script>
+	<script src="../js/todolist.js"></script>
+	<script src="../js/dashboard.js"></script>
+	<script src="../js/Chart.roundedBarCharts.js"></script>
+	<script src="../vendors/js/vendor.bundle.base.js"></script>
 </body>
 
 </html>
