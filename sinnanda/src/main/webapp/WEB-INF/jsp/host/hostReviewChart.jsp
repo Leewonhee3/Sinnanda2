@@ -101,7 +101,7 @@
       
       $.ajax({
          type:'get',
-         url:'/host/getHostReviewChart?year=' + year+'&accomName='+accomName,
+         url:'getHostReviewChart?year=' + year+'&accomName='+accomName,
          success:function(json){
             console.log(json);
             

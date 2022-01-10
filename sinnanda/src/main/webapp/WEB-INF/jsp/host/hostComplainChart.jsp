@@ -101,7 +101,7 @@
       
       $.ajax({
          type:'get',
-         url:'/host/getHostComplainChart?year=' + year+'&accomName='+accomName,
+         url:'getHostComplainChart?year=' + year+'&accomName='+accomName,
          success:function(json){
             console.log(json);
             

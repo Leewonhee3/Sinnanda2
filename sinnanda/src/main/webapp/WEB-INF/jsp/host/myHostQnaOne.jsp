@@ -69,7 +69,7 @@
 										<table class="table table-myPage" style="width: 100%;">
 											<tr>
 												<th style="width: 10%; font-size: 20px; text-align:center;">제목</th>
-												<td colspan="3" style="font-size: 20px;">${hostQna.hostQnaTitle}</td>
+												<td style="font-size: 20px;">${hostQna.hostQnaTitle}</td>
 											</tr>
 											<tr>
 												<th style="text-align:center;">작성자</th>
@@ -84,16 +84,16 @@
 											</tr>
 											<tr>
 												<th style="text-align:center;">내용</th>
-												<td colspan="3">
-												<textarea cols="50" rows="20"  disabled>${hostQna.hostQnaContent}</textarea></td>
+												<td >
+												<textarea cols="50" rows="15"  disabled>${hostQna.hostQnaContent}</textarea></td>
 											</tr>
 											<tr>
 												<th style="text-align:center;">파일</th>
-												<td colspan="3" style="color: gray;">
+												<td style="color: gray;">
 													<c:if test="${empty hostQna.hostQnaUploadFile}">
 														파일 없음
 													</c:if>
-													<img src="${pageContext.request.contextPath}/images/hostQna/${hostQna.hostQnaUploadFile}" style="width:500px; height:500px; border-radius:10px;">
+													<img src="${pageContext.request.contextPath}/images/hostQna/${hostQna.hostQnaUploadFile}" style="width:150px; height:150px; border-radius:10px;">
 												</td>
 											</tr>
 										</table>
